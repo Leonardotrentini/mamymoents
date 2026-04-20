@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#ab2554"/>
+<meta name="color-scheme" content="light"/>
+<link rel="stylesheet" href="css/mobile-app.css"/>
+<title>Mamy Moments — Galeria</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#006b24",
+                    "on-secondary-fixed": "#23191e",
+                    "on-primary-container": "#fffbff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "outline-variant": "#debfc4",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-container": "#eeeeee",
+                    "primary": "#ab2554",
+                    "primary-fixed-dim": "#ffb1c2",
+                    "surface-container-high": "#e8e8e8",
+                    "on-tertiary-container": "#f7fff2",
+                    "on-secondary-container": "#6f6066",
+                    "primary-container": "#cc406c",
+                    "primary-fixed": "#ffd9df",
+                    "inverse-surface": "#2f3131",
+                    "tertiary-fixed-dim": "#60df71",
+                    "on-primary-fixed": "#3f0018",
+                    "background": "#f9f9f9",
+                    "inverse-primary": "#ffb1c2",
+                    "secondary-fixed-dim": "#d4c2c8",
+                    "surface-dim": "#dadada",
+                    "on-surface": "#1a1c1c",
+                    "surface-tint": "#af2856",
+                    "on-surface-variant": "#574145",
+                    "tertiary-container": "#008730",
+                    "outline": "#8b7075",
+                    "secondary-fixed": "#f1dde4",
+                    "on-tertiary-fixed": "#002106",
+                    "surface-bright": "#f9f9f9",
+                    "secondary": "#695b60",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-primary-fixed-variant": "#8e063f",
+                    "secondary-container": "#f1dde4",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#e2e2e2",
+                    "on-background": "#1a1c1c",
+                    "surface": "#f9f9f9",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#504349",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#7dfd8a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #f9f9f9;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+      .gallery-card.is-filtered-out { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-[#f9f9f9]/80 backdrop-blur-md flex justify-between items-center px-6 py-4 shadow-[0_8px_32px_rgba(171,37,84,0.06)]">
+<div class="flex items-center gap-3">
+<div class="mm-logo-heart w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0" aria-hidden="true">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;">favorite</span>
+</div>
+<span class="text-xl font-bold bg-gradient-to-br from-[#ab2554] to-[#cc406c] bg-clip-text text-transparent font-headline tracking-tight">Mamy Moments</span>
+</div>
+<button class="p-2 text-[#ab2554] hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+</header>
+<main class="pt-24 px-6">
+<!-- Stat Text & Welcome -->
+<div class="mb-8">
+<h1 class="text-3xl font-bold text-on-surface mb-1">Galeria</h1>
+<p id="gallery-stats" class="text-on-surface-variant font-medium">6 momentos guardados</p>
+</div>
+<!-- Filter Bar -->
+<div class="flex gap-3 overflow-x-auto pb-6 no-scrollbar" role="toolbar" aria-label="Filtros da galeria">
+<button type="button" data-filter="all" class="filter-btn px-5 py-2.5 rounded-full bg-primary text-on-primary font-semibold text-sm whitespace-nowrap shadow-subtle transition-transform active:scale-95">Todos</button>
+<button type="button" data-filter="week" class="filter-btn px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-container transition-colors">Semana</button>
+<button type="button" data-filter="month" class="filter-btn px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-container transition-colors">Mês</button>
+<button type="button" data-filter="favorites" class="filter-btn px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-container transition-colors">Favoritos</button>
+</div>
+<!-- Content Grid (Asymmetric Feel) -->
+<div id="gallery-grid" class="grid grid-cols-2 gap-4">
+<!-- Card 1 -->
+<div class="gallery-card flex flex-col gap-3 group" data-card-index="0" data-favorite="true">
+<div class="relative aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-surface-container-low shadow-[0_8px_32px_rgba(171,37,84,0.06)]">
+<img alt="Baby detail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Soft focus close-up of a sleeping baby's hand holding a mother's finger in warm ethereal morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-Uzr41gfxrBJg3QItev9rdOiTc9sitNToH3A0rfEHjzQAI8PBdWOsqYszOycplOaiA4_O8PUzWo9TQwnV0ExESDkeFzYFy-2sWp6NEzyjvYiZ8gc8q9CNIcDM8ABvmtZdQ-hpJTfp8xn7CnW2RNpaUKBWzWugxpYdDGJUbSPsJJKvl8qBeu4eDOavSMxHNKMBvc4HpQdclfVpMQcH4DVqizhp_-eNOXIt5tnj81dA9pJs0DOtd8ZECxCnqzzgc9Oif4GuUJgxxxXa"/>
+<button type="button" class="gallery-fav absolute top-3 right-3 w-8 h-8 rounded-full glass-card flex items-center justify-center text-primary border-0 cursor-pointer" aria-label="Favoritar">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite" data-weight="fill" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<div class="px-1">
+<p class="text-sm font-semibold text-on-surface leading-snug">Primeiro sorriso hoje!</p>
+<p class="gallery-card-date text-[11px] text-on-surface-variant font-medium mt-1">25/08/2024</p>
+</div>
+</div>
+<!-- Card 2 (Offset for Asymmetry) -->
+<div class="gallery-card flex flex-col gap-3 group mt-6" data-card-index="1" data-favorite="false">
+<div class="relative aspect-[1/1] rounded-[1.5rem] overflow-hidden bg-surface-container-low shadow-[0_8px_32px_rgba(171,37,84,0.06)]">
+<img alt="Baby feet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Artistic soft focus photograph of tiny baby feet wrapped in a cream colored wool blanket, natural sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4E-6l7lmHEQGTneGZa1zz7pZEbT8Q1-IlwLhXrV9AibzaRbyiXGEygY78_a48-9mi6fJGCzc4AP6rsXqd3o6MHVx68Gn_AqjL9Wma15g2NEXU69cbiOWd-zhKAVOxgcAwG9Jr7uGpoFnhO9LzdYnHLc-ZwPabVzPGat-EsYoxTB7O4hAF_pBD2PV2f1QP010ik9yDK5wdOl7x-6-SdhKMPp24Yg2muSq1qnD0CYv1CYryCLhNOVcLanrKWhKVsBtrrHjf_yN5moL4"/>
+<button type="button" class="gallery-fav absolute top-3 right-3 w-8 h-8 rounded-full glass-card flex items-center justify-center text-on-surface-variant border-0 cursor-pointer" aria-label="Favoritar">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="px-1">
+<p class="text-sm font-semibold text-on-surface leading-snug">Pezinhos tão pequenos...</p>
+<p class="gallery-card-date text-[11px] text-on-surface-variant font-medium mt-1">24/08/2024</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="gallery-card flex flex-col gap-3 group" data-card-index="2" data-favorite="false">
+<div class="relative aspect-[3/4] rounded-[1.5rem] overflow-hidden bg-surface-container-low shadow-[0_8px_32px_rgba(171,37,84,0.06)]">
+<img alt="Mom and baby" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Close up of a mother kissing a baby's cheek, intimate and emotional mood, warm beige color palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCR5UqdaGQIEqM0ZADPDE9PX5K5yn_WbE9bTuE97rYcFcAruV5bSTQNmgccEmNU8qxNtZyVSenpF1AaRS4Az0mVQJn-yX16YJvnnZCSxsWidVxvcoFhB5we_YK5__X0FTekkQ4CRaBIebuJtbhoH-MWSp4tILkKMp1Hq2V7EMMEBzFsdpIO7PoW--h-Yk0H0lFZfPLno535kkPQIdr5jLTe_73aAFwDTcNAerodXJ9GzpQ3vY4Q3MCIfblfwHZln_vMeY_AlYRC3NN"/>
+<button type="button" class="gallery-fav absolute top-3 right-3 w-8 h-8 rounded-full glass-card flex items-center justify-center text-on-surface-variant border-0 cursor-pointer" aria-label="Favoritar">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="px-1">
+<p class="text-sm font-semibold text-on-surface leading-snug">Colinho da manhã.</p>
+<p class="gallery-card-date text-[11px] text-on-surface-variant font-medium mt-1">22/08/2024</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="gallery-card flex flex-col gap-3 group -mt-10" data-card-index="3" data-favorite="true">
+<div class="relative aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-surface-container-low shadow-[0_8px_32px_rgba(171,37,84,0.06)]">
+<img alt="Nursery room" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Beautifully curated nursery corner with a white wooden crib and a plush teddy bear, soft afternoon glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaXDsH767ecieEZe9uZdfovy_s-biwdmd_KXbGrc1WhEl-b7P9mbm9oXbDQGiz7rQttC-H3Etm8_FJ9RDPe2zAs7sUXO7VFVCasyGzHhT27tYe-I4Up6kAfxkFJAyf5u3TJ54HseHKebj-iXc66x7pmwKOyTJyGAa0BF8S-UKy4aCHPuigDwEJkPiCjKQwgNL6OoCzBOPRHXU3LFju3dFRQKHPRhUVPstlj-BvmEKrQyUod-HQ1jGCcLahq_S6I8JDZdcpAItqRAYo"/>
+<button type="button" class="gallery-fav absolute top-3 right-3 w-8 h-8 rounded-full glass-card flex items-center justify-center text-primary border-0 cursor-pointer" aria-label="Favoritar">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite" data-weight="fill" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<div class="px-1">
+<p class="text-sm font-semibold text-on-surface leading-snug">Seu quartinho pronto.</p>
+<p class="gallery-card-date text-[11px] text-on-surface-variant font-medium mt-1">20/08/2024</p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="gallery-card flex flex-col gap-3 group" data-card-index="4" data-favorite="false">
+<div class="relative aspect-[1/1] rounded-[1.5rem] overflow-hidden bg-surface-container-low shadow-[0_8px_32px_rgba(171,37,84,0.06)]">
+<img alt="Baby hands" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Tiny baby fingers clutching a soft pastel pink knitted blanket, focus on texture and warmth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASXfxeJW0GRLLzbzybIJ1TQ7s2EWfSgaeLjO8-KX3tmATe7aaHq4OEDQ_lYx4v05H8jtfi9PRj1NYs27rdB22tElk0ltKoip8_OVi2B5xhvwgyTrxCMwL7siPrgxDLNnM-Uradthd__xq70pYSrIUjh0EBZiQM3IvXP0Mui-4aNdvowfAJbbJv5Ca-42vj89s4OHGvPerkS0fxufZi0b-5GsUHdOIC9E3C9GDunlnpDAB_GZ_u6rrGDx4ItW73N7WHLkZzB2OL2Jgl"/>
+<button type="button" class="gallery-fav absolute top-3 right-3 w-8 h-8 rounded-full glass-card flex items-center justify-center text-on-surface-variant border-0 cursor-pointer" aria-label="Favoritar">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="px-1">
+<p class="text-sm font-semibold text-on-surface leading-snug">Descobertas táteis.</p>
+<p class="gallery-card-date text-[11px] text-on-surface-variant font-medium mt-1">19/08/2024</p>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="gallery-card flex flex-col gap-3 group mt-4" data-card-index="5" data-favorite="false">
+<div class="relative aspect-[3/4] rounded-[1.5rem] overflow-hidden bg-surface-container-low shadow-[0_8px_32px_rgba(171,37,84,0.06)]">
+<img alt="Sleeping baby" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Peaceful baby sleeping on a cloud-like white surface, cinematic soft focus, clean and minimal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC43-9urUt3CWdBkVW8jJTPNzllKMq3zCCI8x0eWjD_o7aoznJAHUYKnVviHIm5YoKY8pZKKRyYs7lCDMlxSbJ3z4s5iy9abegm7Vw4yu-WXOVIaGaJslEHB0wMKS88C4V9jLbUBJQlH4y--ebMH8VXEom_yfb0p_LFmegisw5zisyBSbrqTp2vG1rlGa0cgQxixnzzXbZNc4TB4yJbDjNOe-SVUhl41aMuKVAm4k-adtMhXLCANsWw68d0E2a992VTyOdP5TZRzU-N"/>
+<button type="button" class="gallery-fav absolute top-3 right-3 w-8 h-8 rounded-full glass-card flex items-center justify-center text-on-surface-variant border-0 cursor-pointer" aria-label="Favoritar">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="px-1">
+<p class="text-sm font-semibold text-on-surface leading-snug">O sono dos anjos.</p>
+<p class="gallery-card-date text-[11px] text-on-surface-variant font-medium mt-1">18/08/2024</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-3 pb-8 px-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-lg rounded-t-[2.5rem] shadow-[0_-8px_32px_rgba(171,37,84,0.08)]">
+<!-- Gallery is Active -->
+<a class="flex flex-col items-center justify-center text-[#ab2554] bg-rose-50 rounded-2xl px-5 py-2 hover:text-[#cc406c] transition-colors tap-highlight-transparent no-underline" href="gallery.html">
+<span class="material-symbols-outlined" data-icon="photo_library" data-weight="fill" style="font-variation-settings: 'FILL' 1;">photo_library</span>
+<span class="text-[10px] uppercase tracking-widest font-['Plus_Jakarta_Sans'] font-medium mt-1">Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 px-5 py-2 hover:text-[#cc406c] transition-colors tap-highlight-transparent no-underline" href="add.html">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="text-[10px] uppercase tracking-widest font-['Plus_Jakarta_Sans'] font-medium mt-1">Add</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 px-5 py-2 hover:text-[#cc406c] transition-colors tap-highlight-transparent no-underline" href="journey.html">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="text-[10px] uppercase tracking-widest font-['Plus_Jakarta_Sans'] font-medium mt-1">History</span>
+</a>
+</nav>
+<script src="js/mamy-progress.js"></script>
+<script>
+(function () {
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function injectUserMoments() {
+    var grid = document.getElementById('gallery-grid');
+    if (!grid || !window.MamyProgress) return;
+    var store = MamyProgress.loadMoments();
+    if (!store.items || !store.items.length) return;
+    for (var i = store.items.length - 1; i >= 0; i--) {
+      var item = store.items[i];
+      var card = document.createElement('div');
+      card.className = 'gallery-card flex flex-col gap-3 group';
+      card.setAttribute('data-card-index', 'u-' + String(item.id));
+      card.setAttribute('data-user-moment', 'true');
+      card.setAttribute('data-date', item.date || MamyProgress.todayKey());
+
+      var wrap = document.createElement('div');
+      wrap.className =
+        'relative aspect-[4/5] rounded-[1.5rem] overflow-hidden shadow-[0_8px_32px_rgba(171,37,84,0.06)] bg-surface-container-low';
+
+      if (item.photoDataUrl && String(item.photoDataUrl).indexOf('data:image') === 0) {
+        var im = document.createElement('img');
+        im.src = item.photoDataUrl;
+        im.alt = '';
+        im.className = 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-700';
+        wrap.appendChild(im);
+      } else {
+        var holder = document.createElement('div');
+        holder.className =
+          'w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/15 to-primary-container/25';
+        var sp = document.createElement('span');
+        sp.className = 'material-symbols-outlined text-primary text-5xl';
+        sp.textContent = 'auto_awesome';
+        sp.style.fontVariationSettings = "'FILL' 1";
+        holder.appendChild(sp);
+        wrap.appendChild(holder);
+      }
+
+      var favBtn = document.createElement('button');
+      favBtn.type = 'button';
+      favBtn.className =
+        'gallery-fav absolute top-3 right-3 w-8 h-8 rounded-full glass-card flex items-center justify-center text-on-surface-variant border-0 cursor-pointer';
+      favBtn.setAttribute('aria-label', 'Favoritar');
+      var favIc = document.createElement('span');
+      favIc.className = 'material-symbols-outlined text-[20px]';
+      favIc.setAttribute('data-icon', 'favorite');
+      favIc.textContent = 'favorite';
+      favBtn.appendChild(favIc);
+      wrap.appendChild(favBtn);
+
+      var body = document.createElement('div');
+      body.className = 'px-1';
+      var p1 = document.createElement('p');
+      p1.className = 'text-sm font-semibold text-on-surface leading-snug';
+      p1.textContent = item.preview || item.note || 'Momento seu';
+      var p2 = document.createElement('p');
+      p2.className = 'gallery-card-date text-[11px] text-on-surface-variant font-medium mt-1';
+      var parts = (item.date || '').split('-');
+      p2.textContent = parts.length === 3 ? parts[2] + '/' + parts[1] + '/' + parts[0] : '';
+      body.appendChild(p1);
+      body.appendChild(p2);
+
+      card.appendChild(wrap);
+      card.appendChild(body);
+      grid.insertBefore(card, grid.firstChild);
+    }
+  }
+
+  injectUserMoments();
+
+  var FAV_KEY = 'mamyMoments_gallery_favorites';
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.gallery-card'));
+  var filterBtns = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
+  var statsEl = document.getElementById('gallery-stats');
+  var activeFilter = 'all';
+
+  function pad(n) {
+    return String(n).padStart(2, '0');
+  }
+
+  function formatBR(d) {
+    return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear();
+  }
+
+  function isoDate(d) {
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+
+  /** Ajusta datas de demonstração para os últimos 6 dias (filtros Semana/Mês funcionam hoje). */
+  function seedDemoDates() {
+    var now = new Date();
+    var j = 0;
+    cards.forEach(function (card) {
+      if (card.getAttribute('data-user-moment') === 'true') return;
+      var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - j);
+      j++;
+      card.setAttribute('data-date', isoDate(d));
+      var el = card.querySelector('.gallery-card-date');
+      if (el) el.textContent = formatBR(d);
+    });
+  }
+
+  function startOfWeekMonday(ref) {
+    var d = new Date(ref.getFullYear(), ref.getMonth(), ref.getDate());
+    var day = d.getDay();
+    var diff = day === 0 ? -6 : 1 - day;
+    d.setDate(d.getDate() + diff);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  function endOfWeekSunday(ref) {
+    var s = startOfWeekMonday(ref);
+    var e = new Date(s);
+    e.setDate(e.getDate() + 7);
+    e.setMilliseconds(e.getMilliseconds() - 1);
+    return e;
+  }
+
+  function parseCardDate(card) {
+    var iso = card.getAttribute('data-date');
+    if (!iso) return null;
+    var p = iso.split('-');
+    if (p.length !== 3) return null;
+    return new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10), 12, 0, 0, 0);
+  }
+
+  function loadFavorites() {
+    try {
+      var raw = localStorage.getItem(FAV_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function saveFavorites(map) {
+    localStorage.setItem(FAV_KEY, JSON.stringify(map));
+  }
+
+  function getFavoriteMap() {
+    var m = loadFavorites();
+    if (!m || typeof m !== 'object') {
+      m = {};
+      cards.forEach(function (card) {
+        var idx = card.getAttribute('data-card-index');
+        m[idx] = card.getAttribute('data-favorite') === 'true';
+      });
+      saveFavorites(m);
+    }
+    return m;
+  }
+
+  var favMap = getFavoriteMap();
+
+  function applyFavoriteUI(card, on) {
+    card.setAttribute('data-favorite', on ? 'true' : 'false');
+    var btn = card.querySelector('.gallery-fav');
+    var span = btn && btn.querySelector('.material-symbols-outlined');
+    if (!btn || !span) return;
+    if (on) {
+      btn.classList.remove('text-on-surface-variant');
+      btn.classList.add('text-primary');
+      span.style.fontVariationSettings = "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24";
+    } else {
+      btn.classList.add('text-on-surface-variant');
+      btn.classList.remove('text-primary');
+      span.style.fontVariationSettings = "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24";
+    }
+  }
+
+  cards.forEach(function (card) {
+    var idx = card.getAttribute('data-card-index');
+    applyFavoriteUI(card, !!favMap[idx]);
+  });
+
+  cards.forEach(function (card) {
+    var btn = card.querySelector('.gallery-fav');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var idx = card.getAttribute('data-card-index');
+      favMap[idx] = !favMap[idx];
+      saveFavorites(favMap);
+      applyFavoriteUI(card, favMap[idx]);
+      if (activeFilter === 'favorites') applyFilter();
+    });
+  });
+
+  function cardMatchesFilter(card) {
+    var d = parseCardDate(card);
+    var now = new Date();
+    var idx = card.getAttribute('data-card-index');
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'favorites') return !!favMap[idx];
+    if (!d) return false;
+    if (activeFilter === 'month') {
+      return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    }
+    if (activeFilter === 'week') {
+      var a = startOfWeekMonday(now);
+      var b = endOfWeekSunday(now);
+      return d >= a && d <= b;
+    }
+    return true;
+  }
+
+  function setFilterButtonStyles() {
+    filterBtns.forEach(function (b) {
+      var on = b.getAttribute('data-filter') === activeFilter;
+      b.classList.toggle('bg-primary', on);
+      b.classList.toggle('text-on-primary', on);
+      b.classList.toggle('font-semibold', on);
+      b.classList.toggle('shadow-subtle', on);
+      b.classList.toggle('bg-surface-container-low', !on);
+      b.classList.toggle('text-on-surface-variant', !on);
+      b.classList.toggle('font-medium', !on);
+    });
+  }
+
+  function applyFilter() {
+    var visible = 0;
+    cards.forEach(function (card) {
+      var ok = cardMatchesFilter(card);
+      card.classList.toggle('is-filtered-out', !ok);
+      if (ok) visible++;
+    });
+    var total = cards.length;
+    if (activeFilter === 'all') {
+      statsEl.textContent = total + ' momentos guardados';
+    } else {
+      statsEl.textContent = visible + ' de ' + total + ' momentos neste filtro';
+    }
+  }
+
+  filterBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      activeFilter = b.getAttribute('data-filter') || 'all';
+      setFilterButtonStyles();
+      applyFilter();
+    });
+  });
+
+  seedDemoDates();
+  setFilterButtonStyles();
+  applyFilter();
+})();
+</script>
+</body></html>

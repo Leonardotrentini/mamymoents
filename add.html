@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#ab2554"/>
+<meta name="color-scheme" content="light"/>
+<link rel="stylesheet" href="css/mobile-app.css"/>
+<title>Mamy Moments - Adicionar Momento</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#006b24",
+                    "on-secondary-fixed": "#23191e",
+                    "on-primary-container": "#fffbff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "outline-variant": "#debfc4",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-container": "#eeeeee",
+                    "primary": "#ab2554",
+                    "primary-fixed-dim": "#ffb1c2",
+                    "surface-container-high": "#e8e8e8",
+                    "on-tertiary-container": "#f7fff2",
+                    "on-secondary-container": "#6f6066",
+                    "primary-container": "#cc406c",
+                    "primary-fixed": "#ffd9df",
+                    "inverse-surface": "#2f3131",
+                    "tertiary-fixed-dim": "#60df71",
+                    "on-primary-fixed": "#3f0018",
+                    "background": "#f9f9f9",
+                    "inverse-primary": "#ffb1c2",
+                    "secondary-fixed-dim": "#d4c2c8",
+                    "surface-dim": "#dadada",
+                    "on-surface": "#1a1c1c",
+                    "surface-tint": "#af2856",
+                    "on-surface-variant": "#574145",
+                    "tertiary-container": "#008730",
+                    "outline": "#8b7075",
+                    "secondary-fixed": "#f1dde4",
+                    "on-tertiary-fixed": "#002106",
+                    "surface-bright": "#f9f9f9",
+                    "secondary": "#695b60",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-primary-fixed-variant": "#8e063f",
+                    "secondary-container": "#f1dde4",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#e2e2e2",
+                    "on-background": "#1a1c1c",
+                    "surface": "#f9f9f9",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#504349",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#7dfd8a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .scrapbook-mask {
+            clip-path: inset(0% 0% 0% 0% round 1.5rem);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#f9f9f9]/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-[0_8px_32px_rgba(171,37,84,0.06)] fixed top-0 z-50 flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="mm-logo-heart w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0" aria-hidden="true">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;">favorite</span>
+</div>
+<h1 class="text-xl font-bold bg-gradient-to-br from-[#ab2554] to-[#cc406c] bg-clip-text text-transparent font-['Plus_Jakarta_Sans'] tracking-tight">Mamy Moments</h1>
+</div>
+<button class="material-symbols-outlined text-[#ab2554] hover:opacity-80 transition-opacity" data-icon="dark_mode">dark_mode</button>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Editorial Header -->
+<header class="mb-10 text-center">
+<h2 id="add-page-title" class="text-[2.75rem] leading-tight font-headline font-bold text-on-surface tracking-tight mb-2">Salvar momento mágico ❤️</h2>
+<p class="text-on-surface-variant italic font-light">Escolha uma foto, escreva o que sentiu — ou os dois.</p>
+</header>
+<!-- Section 1: Photo Upload Area -->
+<section class="mb-12">
+<input type="file" id="moment-photo-input" accept="image/*" class="sr-only" aria-label="Escolher foto"/>
+<label for="moment-photo-input" id="moment-photo-label" class="relative w-full aspect-[4/5] rounded-[2.5rem] bg-surface-container-low overflow-hidden shadow-subtle group block cursor-pointer">
+<img id="moment-photo-img" alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02] pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6M8ktBCQaZuRbTws4lSTFZ8HpUSTe-9njswOFjqs9x5ThQlwqRtTpJHhrUXcWl1IGg2ge3v5dGd6DblboTl5sEjYwe63jNG3zxW8d2hrvZFIemywnaKBrzZv-WOJ6k5YI8H99rkaT5PJaGH8KiKcXUg39gPYLmWpU-FwGlvRq2yjCrxhpCtasg7qwA_2Z5LxMT-TqXAj9X3Fg1AuhNafMMOuJ_nhDAWnuBwteMv8Bw-pyezFIyxUWLk4XRKdyCHohWSlCZYklW6zA"/>
+<div id="moment-photo-overlay" class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none transition-opacity duration-300">
+<div class="w-20 h-20 rounded-full bg-white/95 flex items-center justify-center mb-4 shadow-lg">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="add_a_photo">add_a_photo</span>
+</div>
+<p class="text-white font-semibold tracking-wide uppercase text-xs drop-shadow-sm">Toque para escolher ou tirar foto</p>
+<p class="text-white/85 text-[11px] mt-2 max-w-[240px]">Galeria ou câmera — a imagem é otimizada para guardar com segurança.</p>
+</div>
+</label>
+<div class="mt-3 flex justify-center gap-3">
+<button type="button" id="moment-photo-clear" class="hidden text-sm font-semibold text-primary border-0 bg-transparent cursor-pointer hover:underline">Remover foto</button>
+<button type="button" id="moment-photo-repick" class="hidden text-sm font-semibold text-on-surface-variant border-0 bg-transparent cursor-pointer hover:text-primary">Trocar foto</button>
+</div>
+<p id="moment-photo-status" class="text-center text-xs text-on-surface-variant mt-2 min-h-[1rem]" aria-live="polite"></p>
+</section>
+<!-- Section 2: Textarea for Feeling -->
+<section class="mb-10">
+<div class="bg-surface-container-low rounded-3xl p-8 transition-all hover:bg-surface-container">
+<label class="block text-primary font-bold text-lg mb-4">O que você sentiu?</label>
+<textarea id="moment-note" maxlength="1000" class="w-full bg-transparent border-0 focus:ring-0 text-xl font-headline leading-relaxed text-on-surface placeholder:text-on-surface-variant/40 min-h-[160px] p-0 resize-none" placeholder="Descreva as batidas do seu coração hoje..."></textarea>
+<div class="flex justify-end mt-4">
+<span id="moment-note-count" class="text-on-surface-variant/60 font-label text-xs tracking-widest">0 / 1000</span>
+</div>
+<div class="w-full h-[2px] bg-primary mt-2"></div>
+</div>
+</section>
+<!-- Section 3: Input fields -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+<!-- Location -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_4px_16px_rgba(171,37,84,0.04)]">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="location_on">location_on</span>
+<label class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Localização</label>
+</div>
+<input id="moment-place" class="w-full bg-transparent border-0 border-b-2 border-surface-container-high focus:border-primary focus:ring-0 p-0 py-2 text-on-surface font-medium" placeholder="Em casa" type="text"/>
+</div>
+<!-- People -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_4px_16px_rgba(171,37,84,0.04)]">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="group">group</span>
+<label class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Pessoas</label>
+</div>
+<input id="moment-people" class="w-full bg-transparent border-0 border-b-2 border-surface-container-high focus:border-primary focus:ring-0 p-0 py-2 text-on-surface font-medium" placeholder="Papai e eu" type="text"/>
+</div>
+</section>
+<!-- Action Button -->
+<div class="mb-16">
+<button type="button" id="moment-save" class="w-full py-5 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold text-lg shadow-[0_12px_40px_rgba(171,37,84,0.3)] hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-3 border-0 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                Salvar momento
+            </button>
+<p id="moment-save-hint" class="text-center text-on-surface-variant text-xs mt-6 opacity-60">Este momento entra na galeria e soma pontos no Crescimento.</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-3 pb-8 px-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-lg shadow-[0_-8px_32px_rgba(171,37,84,0.08)] rounded-t-[2.5rem] overflow-hidden">
+<!-- Gallery -->
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-2 hover:text-[#cc406c] transition-colors tap-highlight-transparent no-underline" href="gallery.html">
+<span class="material-symbols-outlined mb-1" data-icon="photo_library">photo_library</span>
+<span class="text-[10px] uppercase tracking-widest font-['Plus_Jakarta_Sans'] font-medium">Gallery</span>
+</a>
+<!-- Add (Active) -->
+<a class="flex flex-col items-center justify-center text-[#ab2554] dark:text-[#cc406c] bg-rose-50 dark:bg-rose-950/30 rounded-2xl px-5 py-2 animate-pulse-subtle no-underline" href="add.html">
+<span class="material-symbols-outlined mb-1" data-icon="add_circle" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="text-[10px] uppercase tracking-widest font-['Plus_Jakarta_Sans'] font-medium">Add</span>
+</a>
+<!-- History -->
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-2 hover:text-[#cc406c] transition-colors tap-highlight-transparent no-underline" href="journey.html">
+<span class="material-symbols-outlined mb-1" data-icon="history_edu">history_edu</span>
+<span class="text-[10px] uppercase tracking-widest font-['Plus_Jakarta_Sans'] font-medium">History</span>
+</a>
+</nav>
+<script src="js/mamy-progress.js"></script>
+<script>
+(function () {
+  var DEFAULT_IMG =
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuA6M8ktBCQaZuRbTws4lSTFZ8HpUSTe-9njswOFjqs9x5ThQlwqRtTpJHhrUXcWl1IGg2ge3v5dGd6DblboTl5sEjYwe63jNG3zxW8d2hrvZFIemywnaKBrzZv-WOJ6k5YI8H99rkaT5PJaGH8KiKcXUg39gPYLmWpU-FwGlvRq2yjCrxhpCtasg7qwA_2Z5LxMT-TqXAj9X3Fg1AuhNafMMOuJ_nhDAWnuBwteMv8Bw-pyezFIyxUWLk4XRKdyCHohWSlCZYklW6zA';
+
+  var momentPhotoDataUrl = null;
+  var ta = document.getElementById('moment-note');
+  var cnt = document.getElementById('moment-note-count');
+  var btn = document.getElementById('moment-save');
+  var hint = document.getElementById('moment-save-hint');
+  var photoInput = document.getElementById('moment-photo-input');
+  var photoImg = document.getElementById('moment-photo-img');
+  var photoOverlay = document.getElementById('moment-photo-overlay');
+  var photoClear = document.getElementById('moment-photo-clear');
+  var photoRepick = document.getElementById('moment-photo-repick');
+  var photoStatus = document.getElementById('moment-photo-status');
+
+  function resizeImageFile(file, maxEdge, quality, cb) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      var dataUrl = reader.result;
+      var img = new Image();
+      img.onload = function () {
+        var w = img.naturalWidth;
+        var h = img.naturalHeight;
+        if (!w || !h) {
+          cb(null);
+          return;
+        }
+        var scale = 1;
+        if (w >= h && w > maxEdge) scale = maxEdge / w;
+        else if (h > w && h > maxEdge) scale = maxEdge / h;
+        var tw = Math.max(1, Math.round(w * scale));
+        var th = Math.max(1, Math.round(h * scale));
+        var canvas = document.createElement('canvas');
+        canvas.width = tw;
+        canvas.height = th;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, tw, th);
+        var out;
+        try {
+          out = canvas.toDataURL('image/jpeg', quality);
+        } catch (e) {
+          out = dataUrl;
+        }
+        cb(out);
+      };
+      img.onerror = function () {
+        cb(null);
+      };
+      img.src = dataUrl;
+    };
+    reader.onerror = function () {
+      cb(null);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function setPhotoUI(hasCustom) {
+    if (hasCustom) {
+      photoOverlay.classList.add('opacity-0');
+      photoClear.classList.remove('hidden');
+      photoRepick.classList.remove('hidden');
+    } else {
+      photoOverlay.classList.remove('opacity-0');
+      photoClear.classList.add('hidden');
+      photoRepick.classList.add('hidden');
+      photoImg.src = DEFAULT_IMG;
+    }
+  }
+
+  function clearPhoto() {
+    momentPhotoDataUrl = null;
+    if (photoInput) photoInput.value = '';
+    setPhotoUI(false);
+    if (photoStatus) photoStatus.textContent = '';
+  }
+
+  if (photoInput && photoImg) {
+    photoInput.addEventListener('change', function () {
+      var f = photoInput.files && photoInput.files[0];
+      if (!f) return;
+      if (!/^image\//.test(f.type)) {
+        if (photoStatus) photoStatus.textContent = 'Escolha um ficheiro de imagem (JPG, PNG, etc.).';
+        return;
+      }
+      if (f.size > 25 * 1024 * 1024) {
+        if (photoStatus) photoStatus.textContent = 'Ficheiro demasiado grande. Tente outra foto (máx. ~25 MB).';
+        return;
+      }
+      if (photoStatus) photoStatus.textContent = 'A otimizar imagem…';
+      resizeImageFile(f, 1280, 0.82, function (dataUrl) {
+        if (!dataUrl) {
+          if (photoStatus) photoStatus.textContent = 'Não foi possível ler esta imagem.';
+          return;
+        }
+        momentPhotoDataUrl = dataUrl;
+        photoImg.src = dataUrl;
+        setPhotoUI(true);
+        if (photoStatus) {
+          photoStatus.textContent = 'Foto pronta. Pode guardar só com a foto ou completar o texto abaixo.';
+        }
+      });
+    });
+  }
+
+  if (photoClear) {
+    photoClear.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      clearPhoto();
+    });
+  }
+  if (photoRepick) {
+    photoRepick.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (photoInput) photoInput.click();
+    });
+  }
+
+  if (ta && cnt) {
+    function upd() {
+      cnt.textContent = ta.value.length + ' / 1000';
+    }
+    ta.addEventListener('input', upd);
+    upd();
+  }
+  if (!btn || !window.MamyProgress) return;
+  btn.addEventListener('click', function () {
+    var note = (document.getElementById('moment-note') && document.getElementById('moment-note').value.trim()) || '';
+    var place = (document.getElementById('moment-place') && document.getElementById('moment-place').value.trim()) || '';
+    var people = (document.getElementById('moment-people') && document.getElementById('moment-people').value.trim()) || '';
+    if (!note && !place && !people && !momentPhotoDataUrl) {
+      if (hint) {
+        hint.textContent = 'Adicione uma foto ou escreva algo (sentimento, local ou pessoas) para guardar.';
+        hint.classList.remove('opacity-60');
+        hint.classList.add('text-error', 'font-medium');
+      }
+      return;
+    }
+    if (hint) {
+      hint.classList.add('opacity-60');
+      hint.classList.remove('text-error', 'font-medium');
+      hint.textContent = 'Este momento entra na galeria e soma pontos no Crescimento.';
+    }
+    var preview =
+      note ||
+      (place ? 'Em ' + place : '') + (people ? (place ? ' · ' : '') + people : '') ||
+      (momentPhotoDataUrl ? 'Momento com foto' : 'Momento registado');
+    if (preview.length > 80) preview = preview.slice(0, 77) + '…';
+    var dk = MamyProgress.todayKey();
+    var payload = {
+      date: dk,
+      note: note,
+      place: place,
+      people: people,
+      preview: preview,
+      createdAt: new Date().toISOString(),
+    };
+    if (momentPhotoDataUrl) payload.photoDataUrl = momentPhotoDataUrl;
+
+    var saved = MamyProgress.appendMoment(payload);
+    if (!saved) {
+      if (hint) {
+        hint.textContent =
+          'Não coube na memória do navegador. Remova a foto ou use uma mais simples, ou apague momentos antigos.';
+        hint.classList.remove('opacity-60');
+        hint.classList.add('text-error', 'font-medium');
+      }
+      return;
+    }
+    window.location.href = 'gallery.html';
+  });
+})();
+</script>
+</body></html>

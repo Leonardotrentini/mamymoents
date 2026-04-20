@@ -1,0 +1,89 @@
+/* Mamy Moments — otimizações mobile e safe-area (iOS / Android) */
+:root {
+  --mm-safe-top: env(safe-area-inset-top, 0px);
+  --mm-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --mm-safe-left: env(safe-area-inset-left, 0px);
+  --mm-safe-right: env(safe-area-inset-right, 0px);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  -webkit-tap-highlight-color: rgba(171, 37, 84, 0.15);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Cabeçalhos fixos: respeitar entalhe */
+header.fixed,
+header[class*='sticky'] {
+  padding-left: max(1rem, var(--mm-safe-left));
+  padding-right: max(1rem, var(--mm-safe-right));
+  padding-top: max(0.75rem, var(--mm-safe-top));
+}
+
+/* Navegação inferior fixa: home indicator */
+body > nav.fixed {
+  padding-left: max(0.5rem, var(--mm-safe-left));
+  padding-right: max(0.5rem, var(--mm-safe-right));
+  padding-bottom: max(1.25rem, calc(var(--mm-safe-bottom) + 0.5rem));
+}
+
+/* Conteúdo não ficar por baixo da nav (reforço em ecrãs pequenos) */
+@media (max-width: 480px) {
+  body.min-h-screen.pb-32,
+  body.pb-32,
+  body.pb-36 {
+    padding-bottom: calc(8rem + var(--mm-safe-bottom)) !important;
+  }
+}
+
+/* Ícones de favoritar / fechar — alvo tocável confortável */
+.gallery-fav,
+button[aria-label='Favoritar'],
+button[aria-label='Remover tarefa'] {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+}
+
+.mood-chip,
+.time-chip {
+  min-height: 2.75rem;
+}
+
+/* Inputs: evitar zoom iOS com fonte muito pequena */
+input[type='text'],
+input:not([type]),
+textarea {
+  font-size: 1rem;
+}
+
+@media (min-width: 640px) {
+  input[type='text'],
+  input:not([type]),
+  textarea {
+    font-size: inherit;
+  }
+}
+
+/* Scroll horizontal de filtros / medalhas */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+/* Evitar quebra de layout em grids muito estreitos */
+main {
+  min-width: 0;
+}

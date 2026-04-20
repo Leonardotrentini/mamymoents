@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#ab2554"/>
+<meta name="color-scheme" content="light"/>
+<link rel="stylesheet" href="css/mobile-app.css"/>
+<title>Development &amp; Activities - Mamy Moments</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f3f3f3",
+                    "tertiary-fixed": "#7dfd8a",
+                    "surface": "#f9f9f9",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#f7fff2",
+                    "tertiary-fixed-dim": "#60df71",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-dim": "#dadada",
+                    "secondary-fixed": "#f1dde4",
+                    "surface-container": "#eeeeee",
+                    "primary-fixed-dim": "#ffb1c2",
+                    "on-surface-variant": "#574145",
+                    "on-secondary-fixed": "#23191e",
+                    "outline": "#8b7075",
+                    "inverse-primary": "#ffb1c2",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#6f6066",
+                    "tertiary": "#006b24",
+                    "surface-variant": "#e2e2e2",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#fffbff",
+                    "inverse-surface": "#2f3131",
+                    "surface-bright": "#f9f9f9",
+                    "secondary-fixed-dim": "#d4c2c8",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-tertiary-fixed": "#002106",
+                    "on-surface": "#1a1c1c",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#f1dde4",
+                    "secondary": "#695b60",
+                    "primary-container": "#cc406c",
+                    "background": "#f9f9f9",
+                    "on-secondary-fixed-variant": "#504349",
+                    "surface-container-highest": "#e2e2e2",
+                    "primary": "#ab2554",
+                    "outline-variant": "#debfc4",
+                    "on-primary-fixed": "#3f0018",
+                    "surface-tint": "#af2856",
+                    "on-background": "#1a1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#008730",
+                    "on-primary-fixed-variant": "#8e063f",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "primary-fixed": "#ffd9df"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim min-h-screen pb-32">
+<!-- TopAppBar Component -->
+<header class="bg-neutral-50/80 dark:bg-zinc-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 w-full sticky top-0 z-40">
+<div class="flex items-center gap-3">
+<div class="mm-logo-heart w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0 ring-2 ring-primary/10" aria-hidden="true">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;">favorite</span>
+</div>
+<span class="text-2xl font-semibold tracking-tighter text-rose-900 dark:text-rose-100 font-headline">Mamy Moments</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-rose-700 dark:text-rose-400 hover:bg-rose-50/50 dark:hover:bg-rose-950/30 transition-colors active:scale-95 duration-300 ease-out">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="px-6 py-8 max-w-2xl mx-auto">
+<!-- Milestone Header Section -->
+<section class="mb-10">
+<div class="flex flex-col gap-1">
+<span id="journey-phase-label" class="text-primary font-medium tracking-widest text-[11px] uppercase">Jornada Mamy Moments</span>
+<h1 id="journey-stage-title" class="text-[2.75rem] font-headline font-light leading-tight tracking-tight text-on-surface">Pequeno Explorador</h1>
+</div>
+<div class="mt-6 bg-surface-container-lowest rounded-[2rem] p-8 shadow-[0_8px_32px_rgba(171,37,84,0.06)] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-fixed/30 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-end mb-4">
+<div>
+<span id="journey-points" class="text-3xl font-bold text-primary font-headline">0</span>
+<span class="text-on-surface-variant text-sm ml-1">Pontos de Relíquia</span>
+</div>
+<div class="text-right">
+<span id="journey-level" class="text-xs text-on-surface-variant font-medium uppercase tracking-tighter">Nível 1</span>
+</div>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden">
+<div id="journey-level-bar" class="h-full bg-gradient-to-r from-primary to-primary-container rounded-full transition-[width] duration-500" style="width: 0%"></div>
+</div>
+<p id="journey-milestone-copy" class="mt-4 text-on-surface-variant text-sm leading-relaxed"></p>
+</div>
+</div>
+</section>
+<!-- Asymmetric Bento Grid for Activity & Stats -->
+<section class="grid grid-cols-2 gap-4 mb-10">
+<div class="col-span-2 bg-secondary-container rounded-[1.5rem] p-6 flex items-center justify-between overflow-hidden relative">
+<div class="z-10">
+<h3 class="text-on-secondary-fixed text-lg font-semibold font-headline">Sequência ativa</h3>
+<p id="journey-streak-detail" class="text-on-secondary-fixed-variant text-sm">Comece hoje — um dia conta quando há rituais, checklist ou um momento na galeria.</p>
+</div>
+<div class="z-10 flex -space-x-2">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary shadow-sm border-2 border-secondary-container">
+<span class="material-symbols-outlined text-[20px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary shadow-sm border-2 border-secondary-container">
+<span class="material-symbols-outlined text-[20px]" data-icon="celebration" style="font-variation-settings: 'FILL' 1;">celebration</span>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" data-icon="auto_graph">auto_graph</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-[1.5rem] p-6 aspect-square flex flex-col justify-between">
+<div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-on-surface">No diário</h4>
+<p class="text-3xl font-light font-headline text-on-surface mt-1"><span id="journey-diary-days">0</span> <span class="text-sm">dias</span></p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-[1.5rem] p-6 aspect-square flex flex-col justify-between relative overflow-hidden">
+<div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-tertiary shadow-sm">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-on-surface">Momentos</h4>
+<p class="text-3xl font-light font-headline text-on-surface mt-1"><span id="journey-moment-count">0</span> <span class="text-sm">registos</span></p>
+</div>
+<div class="absolute top-2 right-2 flex">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+</div>
+</div>
+</section>
+<section class="mb-10 rounded-[1.5rem] p-6 bg-surface-container-lowest shadow-[0_4px_24px_rgba(171,37,84,0.05)] ring-1 ring-outline-variant/15">
+<h2 class="text-lg font-headline font-semibold text-on-surface mb-2">Evolução recente</h2>
+<p id="journey-evolution-text" class="text-sm text-on-surface-variant leading-relaxed"></p>
+</section>
+<!-- Daily Checklist Section (interativo: estado em localStorage, renova a cada dia) -->
+<section class="mb-10">
+<div class="flex items-baseline justify-between mb-6 gap-3">
+<h2 class="text-2xl font-headline font-semibold text-on-surface">Rituais Diários</h2>
+<span id="journey-rituals-progress" class="text-xs font-medium text-primary uppercase tracking-widest text-right shrink-0" aria-live="polite">—</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-4 leading-relaxed -mt-2">Esta lista renova <span class="font-medium text-on-surface">todo dia</span> (conforme a data no seu dispositivo). São <span class="font-medium text-on-surface">5 rituais</span> escolhidos de um banco de ~50; quando marcar <span class="font-medium text-on-surface">todos</span>, aparece um <span class="font-medium text-on-surface">novo lote</span> no mesmo dia. Os pontos somam no nível, como no <a href="my-day.html" class="text-primary font-semibold no-underline hover:underline">Meu dia</a>.</p>
+<div id="journey-rituals-list" class="flex flex-col gap-3"></div>
+</section>
+<!-- Milestones Badges -->
+<section>
+<div class="flex items-baseline justify-between mb-6">
+<h2 class="text-2xl font-headline font-semibold text-on-surface">Medalhas Ganhas</h2>
+<button class="text-xs font-medium text-primary uppercase tracking-widest hover:underline">VER TODAS</button>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+<div class="medal-card flex-shrink-0 w-28 text-center flex flex-col items-center gap-3 transition-opacity duration-300 opacity-40 grayscale" data-medal="smile">
+<div class="w-20 h-20 rounded-full bg-gradient-to-tr from-rose-100 to-rose-50 flex items-center justify-center shadow-subtle border-2 border-white">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="face" style="font-variation-settings: 'FILL' 1;">face</span>
+</div>
+<span class="text-xs font-semibold text-on-surface leading-tight">Primeiro Sorriso</span>
+</div>
+<div class="medal-card flex-shrink-0 w-28 text-center flex flex-col items-center gap-3 transition-opacity duration-300 opacity-40 grayscale" data-medal="sleep">
+<div class="w-20 h-20 rounded-full bg-gradient-to-tr from-amber-100 to-amber-50 flex items-center justify-center shadow-subtle border-2 border-white">
+<span class="material-symbols-outlined text-amber-600 text-4xl" data-icon="bedroom_baby" style="font-variation-settings: 'FILL' 1;">bedroom_baby</span>
+</div>
+<span class="text-xs font-semibold text-on-surface leading-tight">Estrela do Sono</span>
+</div>
+<div class="medal-card flex-shrink-0 w-28 text-center flex flex-col items-center gap-3 transition-opacity duration-300 opacity-40 grayscale" data-medal="music">
+<div class="w-20 h-20 rounded-full bg-gradient-to-tr from-sky-100 to-sky-50 flex items-center justify-center shadow-subtle border-2 border-white">
+<span class="material-symbols-outlined text-sky-600 text-4xl" data-icon="music_note" style="font-variation-settings: 'FILL' 1;">music_note</span>
+</div>
+<span class="text-xs font-semibold text-on-surface leading-tight">Criador de Melodias</span>
+</div>
+<div class="medal-card flex-shrink-0 w-28 text-center flex flex-col items-center gap-3 transition-opacity duration-300 opacity-40 grayscale" data-medal="walk">
+<div class="w-20 h-20 rounded-full bg-surface-container-high flex items-center justify-center shadow-subtle border-2 border-white">
+<span class="material-symbols-outlined text-on-surface-variant text-4xl" data-icon="footprint">footprint</span>
+</div>
+<span class="text-xs font-semibold text-on-surface leading-tight">Walk Buddy</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Component -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-end pb-6 pt-2 px-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl shadow-[0_-8px_32px_rgba(171,37,84,0.06)] rounded-t-[2rem]">
+<!-- Gallery -->
+<a href="gallery.html" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 p-2 group hover:text-rose-500 transition-all cursor-pointer no-underline">
+<span class="material-symbols-outlined mb-1" data-icon="photo_library">photo_library</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium uppercase tracking-widest">Galeria</span>
+</a>
+<!-- Add -->
+<a href="add.html" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 p-2 group hover:text-rose-500 transition-all cursor-pointer no-underline">
+<span class="material-symbols-outlined mb-1" data-icon="add_circle">add_circle</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium uppercase tracking-widest">Adicionar</span>
+</a>
+<!-- Growth (ACTIVE) -->
+<a href="journey.html" class="flex flex-col items-center justify-center bg-gradient-to-tr from-rose-600 to-rose-400 text-white rounded-full p-3 mb-2 scale-110 shadow-lg shadow-rose-500/20 active:scale-90 duration-200 cursor-pointer no-underline">
+<span class="material-symbols-outlined" data-icon="auto_graph" style="font-variation-settings: 'FILL' 1;">auto_graph</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-tighter mt-1">Crescimento</span>
+</a>
+<!-- Checklist -->
+<a href="my-day.html" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 p-2 group hover:text-rose-500 transition-all cursor-pointer no-underline">
+<span class="material-symbols-outlined mb-1" data-icon="fact_check">fact_check</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium uppercase tracking-widest">Checklist</span>
+</a>
+</nav>
+<script src="js/mamy-progress.js"></script>
+<script src="js/mamy-pools.js"></script>
+<script>
+(function () {
+  var KEY = 'mamyMoments_journey_rituals_v1';
+  var POOL = window.MM_RITUAL_POOL || [];
+  var BATCH = 5;
+  var LEGACY_IDS = ['tummy', 'story', 'steps', 'outdoor', 'cuddle'];
+  var LEGACY_DEFAULTS = { tummy: true, story: false, steps: false, outdoor: true, cuddle: false };
+
+  /** Evita padStart (alguns WebViews antigos quebram o script inteiro). */
+  function pad2(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
+
+  function todayKey() {
+    var d = new Date();
+    return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+  }
+
+  function shuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    return arr;
+  }
+
+  function ritualById(id) {
+    for (var i = 0; i < POOL.length; i++) {
+      if (POOL[i].id === id) return POOL[i];
+    }
+    return null;
+  }
+
+  function defsFromActiveIds(activeIds) {
+    if (!activeIds || !activeIds.length) return [];
+    return activeIds.map(function (id) {
+      return ritualById(id);
+    }).filter(Boolean);
+  }
+
+  function initJourneyDay(state) {
+    state.usedTodayIds = [];
+    var ids = POOL.map(function (r) {
+      return r.id;
+    });
+    if (ids.length === 0) return;
+    shuffle(ids);
+    state.activeIds = ids.slice(0, Math.min(BATCH, ids.length));
+    state.done = {};
+    state.activeIds.forEach(function (id) {
+      state.done[id] = false;
+    });
+  }
+
+  function advanceJourneyRound(state) {
+    var prev = state.activeIds || [];
+    state.usedTodayIds = (state.usedTodayIds || []).concat(prev);
+    var all = POOL.map(function (r) {
+      return r.id;
+    });
+    var avail = all.filter(function (id) {
+      return state.usedTodayIds.indexOf(id) === -1;
+    });
+    if (avail.length < BATCH) {
+      state.usedTodayIds = [];
+      avail = all.slice();
+    }
+    shuffle(avail);
+    state.activeIds = avail.slice(0, Math.min(BATCH, avail.length));
+    state.done = {};
+    state.activeIds.forEach(function (id) {
+      state.done[id] = false;
+    });
+  }
+
+  var sessionRituals = null;
+  var storageWriteFailed = false;
+
+  function loadState() {
+    var keyToday = todayKey();
+    if (storageWriteFailed && sessionRituals && sessionRituals.date === keyToday) {
+      return sessionRituals;
+    }
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (!raw) {
+        sessionRituals = { date: keyToday, activeIds: [], done: {}, usedTodayIds: [] };
+        initJourneyDay(sessionRituals);
+        return sessionRituals;
+      }
+      var o = JSON.parse(raw);
+      if (o.date !== keyToday) {
+        sessionRituals = { date: keyToday, activeIds: [], done: {}, usedTodayIds: [] };
+        initJourneyDay(sessionRituals);
+        return sessionRituals;
+      }
+      if (!o.done || typeof o.done !== 'object') o.done = {};
+      if (!o.usedTodayIds || !Array.isArray(o.usedTodayIds)) o.usedTodayIds = [];
+      if (!o.activeIds || !Array.isArray(o.activeIds) || o.activeIds.length === 0) {
+        o.activeIds = LEGACY_IDS.slice();
+        LEGACY_IDS.forEach(function (id) {
+          if (typeof o.done[id] !== 'boolean') o.done[id] = !!LEGACY_DEFAULTS[id];
+        });
+      } else {
+        o.activeIds.forEach(function (id) {
+          if (typeof o.done[id] !== 'boolean') o.done[id] = false;
+        });
+      }
+      sessionRituals = o;
+      return o;
+    } catch (e) {
+      if (sessionRituals && sessionRituals.date === keyToday) return sessionRituals;
+      sessionRituals = { date: keyToday, activeIds: [], done: {}, usedTodayIds: [] };
+      initJourneyDay(sessionRituals);
+      return sessionRituals;
+    }
+  }
+
+  function saveState(state) {
+    state.date = todayKey();
+    sessionRituals = state;
+    try {
+      localStorage.setItem(KEY, JSON.stringify(state));
+      storageWriteFailed = false;
+    } catch (e) {
+      storageWriteFailed = true;
+    }
+  }
+
+  function paintDashboard() {
+    if (!window.MamyProgress) return;
+    var d = MamyProgress.getDashboard();
+    var name = d.profile.childName || 'Seu bebê';
+    var elPhase = document.getElementById('journey-phase-label');
+    var elTitle = document.getElementById('journey-stage-title');
+    var elPts = document.getElementById('journey-points');
+    var elLv = document.getElementById('journey-level');
+    var elBar = document.getElementById('journey-level-bar');
+    var elCopy = document.getElementById('journey-milestone-copy');
+    var elStreak = document.getElementById('journey-streak-detail');
+    var elDiary = document.getElementById('journey-diary-days');
+    var elMom = document.getElementById('journey-moment-count');
+    var elEvo = document.getElementById('journey-evolution-text');
+    if (elPhase) elPhase.textContent = d.journeySubtitle;
+    if (elTitle) elTitle.textContent = d.stageTitle;
+    if (elPts) elPts.textContent = String(d.lifetime);
+    if (elLv) elLv.textContent = 'Nível ' + d.level.level;
+    if (elBar) elBar.style.width = d.level.pct + '%';
+    if (elCopy) {
+      var m = d.milestone;
+      var to = d.level.pointsToNext;
+      elCopy.innerHTML =
+        '<span class="font-medium text-on-surface">' +
+        name +
+        '</span> está com <span class="font-semibold text-primary">' +
+        d.level.pct +
+        '%</span> de progresso neste nível, rumo ao marco <span class="font-semibold text-primary">“' +
+        m +
+        '”</span>.' +
+        (to > 0 ? ' Faltam <span class="font-semibold text-on-surface">' + to + '</span> pontos para o próximo nível.' : ' Nível máximo desta faixa — continue registrando momentos!');
+    }
+    if (elStreak) {
+      if (d.streak < 1) {
+        elStreak.textContent = 'Ainda sem sequência — marque um ritual, o checklist ou guarde um momento hoje.';
+      } else {
+        elStreak.textContent =
+          d.streak + (d.streak === 1 ? ' dia seguido' : ' dias seguidos') + ' com atividade registrada.';
+      }
+    }
+    if (elDiary) elDiary.textContent = String(d.activeDays);
+    if (elMom) elMom.textContent = String(d.totalMoments);
+    if (elEvo) {
+      var w = d.week;
+      var line =
+        'Esta semana você somou <span class="font-semibold text-on-surface">' +
+        w.thisWeek +
+        ' pts</span>. Semana anterior: ' +
+        w.lastWeek +
+        ' pts.';
+      if (w.lastWeek > 0 && w.thisWeek !== w.lastWeek) {
+        line +=
+          ' Isso é <span class="font-semibold text-primary">' +
+          (w.deltaPct >= 0 ? '+' : '') +
+          w.deltaPct +
+          '%</span> em relação à semana passada.';
+      } else if (w.thisWeek > 0 && w.lastWeek === 0) {
+        line += ' Ótimo começo de registo semanal.';
+      }
+      elEvo.innerHTML = line;
+    }
+    document.querySelectorAll('[data-medal]').forEach(function (card) {
+      var k = card.getAttribute('data-medal');
+      var on = k && d.medals[k];
+      card.classList.toggle('opacity-40', !on);
+      card.classList.toggle('grayscale', !on);
+      card.classList.toggle('opacity-100', !!on);
+    });
+  }
+
+  function paint() {
+    var state = loadState();
+    var activeDefs = defsFromActiveIds(state.activeIds);
+    if (window.MamyProgress && activeDefs.length) {
+      var pr = MamyProgress.loadProgress();
+      MamyProgress.syncRitualsFromMap(pr, MamyProgress.todayKey(), activeDefs, state.done);
+      MamyProgress.saveProgress(pr);
+    }
+    paintDashboard();
+
+    var list = document.getElementById('journey-rituals-list');
+    var prog = document.getElementById('journey-rituals-progress');
+    if (!list || !prog) return;
+
+    var total = activeDefs.length;
+    var doneCount = activeDefs.filter(function (r) {
+      return state.done[r.id];
+    }).length;
+    prog.textContent = doneCount + ' DE ' + total + ' CONCLUÍDOS';
+
+    list.innerHTML = '';
+    activeDefs.forEach(function (r) {
+      var done = !!state.done[r.id];
+      var row = document.createElement('button');
+      row.type = 'button';
+      row.className =
+        'journey-ritual-row group flex items-center gap-4 p-5 rounded-[1.25rem] w-full text-left border-0 cursor-pointer transition-all ' +
+        (done
+          ? 'bg-surface-container-low'
+          : 'bg-surface-container-lowest shadow-[0_4px_12px_rgba(0,0,0,0.02)] border border-outline-variant/10 hover:bg-surface-container-low');
+      row.setAttribute('aria-pressed', done ? 'true' : 'false');
+
+      var check = document.createElement('div');
+      check.className =
+        'w-6 h-6 shrink-0 rounded-full border-2 flex items-center justify-center pointer-events-none ' +
+        (done ? 'border-primary bg-primary' : 'border-outline-variant group-hover:border-primary');
+      if (done) {
+        var ic = document.createElement('span');
+        ic.className = 'material-symbols-outlined text-white text-[16px] font-bold';
+        ic.textContent = 'check';
+        check.appendChild(ic);
+      }
+
+      var mid = document.createElement('div');
+      mid.className = 'flex-1 min-w-0 pointer-events-none';
+      var h = document.createElement('h4');
+      h.className = 'text-on-surface font-medium leading-snug ' + (done ? 'line-through opacity-50' : '');
+      h.textContent = r.title;
+      var p = document.createElement('p');
+      p.className = 'text-on-surface-variant text-xs mt-0.5 ' + (done ? 'opacity-50' : '');
+      p.textContent = r.subtitle;
+      mid.appendChild(h);
+      mid.appendChild(p);
+
+      var pts = document.createElement('span');
+      pts.className = 'text-xs font-bold shrink-0 pointer-events-none ' + (done ? 'text-tertiary' : 'text-primary');
+      pts.textContent = '+' + r.points + ' pts';
+
+      row.appendChild(check);
+      row.appendChild(mid);
+      row.appendChild(pts);
+
+      row.addEventListener('click', function () {
+        state.done[r.id] = !state.done[r.id];
+        saveState(state);
+        if (window.MamyProgress) {
+          var pr = MamyProgress.loadProgress();
+          MamyProgress.ensureRitual(pr, MamyProgress.todayKey(), r.id, r.points, state.done[r.id]);
+          MamyProgress.saveProgress(pr);
+        }
+        var cur = defsFromActiveIds(state.activeIds);
+        var allOn = cur.length > 0 && cur.every(function (x) {
+          return state.done[x.id];
+        });
+        if (allOn) {
+          advanceJourneyRound(state);
+          saveState(state);
+        }
+        paint();
+      });
+
+      list.appendChild(row);
+    });
+  }
+
+  paint();
+})();
+</script>
+</body></html>

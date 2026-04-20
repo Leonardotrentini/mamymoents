@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ab2554" />
+  <meta name="color-scheme" content="light" />
+  <link rel="stylesheet" href="css/mobile-app.css" />
+  <title>Mamy Moments — Meu dia</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#ab2554',
+            'primary-container': '#cc406c',
+            'on-primary': '#ffffff',
+            'surface-container-low': '#f3f3f3',
+            'surface-container-high': '#e8e8e8',
+            'on-surface': '#1a1c1c',
+            'on-surface-variant': '#574145',
+            surface: '#f9f9f9',
+            'surface-container-lowest': '#ffffff',
+            tertiary: '#006b24',
+            error: '#ba1a1a',
+            outline: '#8b7075',
+            'outline-variant': '#debfc4',
+            'secondary-container': '#f1dde4',
+          },
+          fontFamily: {
+            headline: ['Plus Jakarta Sans', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .chip-on {
+      background: linear-gradient(135deg, #ab2554 0%, #cc406c 100%);
+      color: #fff;
+      font-weight: 600;
+    }
+  </style>
+  <style>
+    body { min-height: max(884px, 100dvh); }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/20 min-h-screen pb-36">
+  <header class="bg-neutral-50/80 dark:bg-zinc-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 w-full sticky top-0 z-40">
+    <div class="flex items-center gap-3">
+      <div class="mm-logo-heart w-10 h-10 rounded-full bg-primary/15 dark:bg-rose-900/40 flex items-center justify-center text-primary shrink-0 ring-2 ring-primary/10" aria-hidden="true">
+        <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1">favorite</span>
+      </div>
+      <span class="text-xl font-semibold tracking-tight text-rose-900 dark:text-rose-100 font-headline">Mamy Moments</span>
+    </div>
+    <a href="journey.html" class="text-xs font-semibold uppercase tracking-widest text-primary hover:opacity-80 no-underline">Crescimento</a>
+  </header>
+
+  <main class="px-6 py-6 max-w-lg mx-auto">
+    <div class="mb-6">
+      <h1 class="text-[2rem] font-headline font-bold leading-tight tracking-tight">Meu dia</h1>
+      <p id="myday-date" class="text-on-surface-variant text-sm mt-1"></p>
+      <p class="text-on-surface-variant text-sm mt-2 leading-relaxed">Diga como está o dia e o tempo que você tem. Montamos sugestões a partir de um <span class="text-on-surface font-medium">banco de ~50 ideias</span> — quando <span class="text-on-surface font-medium">todas</span> as tarefas do lote estiverem feitas, <span class="text-on-surface font-medium">geramos outro lote</span> no mesmo dia (sem tirar os pontos já ganhos). <span class="text-on-surface font-medium">Todo dia o checklist renova;</span> os pontos acumulam no Crescimento.</p>
+    </div>
+
+    <div id="myday-newday-banner" class="hidden mb-6 rounded-2xl bg-primary/10 ring-1 ring-primary/20 px-4 py-3 flex gap-3 items-start" role="status">
+      <span class="material-symbols-outlined text-primary shrink-0 mt-0.5" aria-hidden="true">wb_sunny</span>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-semibold text-on-surface">Novo dia</p>
+        <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Monte de novo o checklist de hoje. O que você fez ontém já entrou nos pontos; hoje é uma página em branco por aqui.</p>
+        <button type="button" id="myday-newday-dismiss" class="mt-2 text-xs font-bold uppercase tracking-wider text-primary border-0 bg-transparent cursor-pointer p-0 hover:opacity-80">Ok, entendi</button>
+      </div>
+    </div>
+
+    <!-- Planejamento -->
+    <section id="planner" class="mb-8 space-y-6">
+      <div class="bg-surface-container-lowest dark:bg-zinc-900/50 rounded-[1.5rem] p-6 shadow-[0_8px_32px_rgba(171,37,84,0.06)] ring-1 ring-black/5">
+        <h2 class="text-sm font-bold uppercase tracking-widest text-primary mb-3">Como está seu dia?</h2>
+        <div id="mood-chips" class="flex flex-wrap gap-2">
+          <button type="button" data-mood="calmo" class="mood-chip px-4 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium border-0 cursor-pointer transition-all hover:bg-surface-container-high">Calmo</button>
+          <button type="button" data-mood="corrido" class="mood-chip px-4 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium border-0 cursor-pointer transition-all hover:bg-surface-container-high">Corrido</button>
+          <button type="button" data-mood="sono" class="mood-chip px-4 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium border-0 cursor-pointer transition-all hover:bg-surface-container-high">Com sono</button>
+          <button type="button" data-mood="conectar" class="mood-chip px-4 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium border-0 cursor-pointer transition-all hover:bg-surface-container-high">Quero conectar</button>
+        </div>
+      </div>
+
+      <div class="bg-surface-container-lowest dark:bg-zinc-900/50 rounded-[1.5rem] p-6 shadow-[0_8px_32px_rgba(171,37,84,0.06)] ring-1 ring-black/5">
+        <h2 class="text-sm font-bold uppercase tracking-widest text-primary mb-3">Tempo disponível</h2>
+        <div id="time-chips" class="flex flex-wrap gap-2">
+          <button type="button" data-time="5" class="time-chip px-4 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium border-0 cursor-pointer transition-all hover:bg-surface-container-high">~5 min</button>
+          <button type="button" data-time="15" class="time-chip px-4 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium border-0 cursor-pointer transition-all hover:bg-surface-container-high">~15 min</button>
+          <button type="button" data-time="30" class="time-chip px-4 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium border-0 cursor-pointer transition-all hover:bg-surface-container-high">30 min ou mais</button>
+        </div>
+      </div>
+
+      <div class="bg-surface-container-lowest dark:bg-zinc-900/50 rounded-[1.5rem] p-6 shadow-[0_8px_32px_rgba(171,37,84,0.06)] ring-1 ring-black/5">
+        <label for="intention" class="text-sm font-bold uppercase tracking-widest text-primary block mb-2">O que você pretende hoje? <span class="font-normal normal-case text-on-surface-variant">(opcional)</span></label>
+        <textarea id="intention" maxlength="200" rows="2" class="w-full rounded-xl border-0 bg-surface-container-low px-4 py-3 text-on-surface placeholder:text-on-surface-variant/50 focus:ring-2 focus:ring-primary resize-none" placeholder="Ex.: brincar um pouco no chão e tirar uma foto juntos"></textarea>
+      </div>
+
+      <button type="button" id="btn-build" class="w-full py-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold text-base shadow-[0_12px_40px_rgba(171,37,84,0.25)] hover:opacity-95 active:scale-[0.99] transition-all border-0 cursor-pointer flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1">auto_awesome</span>
+        Montar checklist sugerido
+      </button>
+    </section>
+
+    <!-- Checklist -->
+    <section id="checklist-block" class="hidden">
+      <button type="button" id="btn-replan" class="w-full mb-5 py-2.5 text-sm font-semibold text-primary border border-primary/30 rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors border-solid cursor-pointer">
+        Ajustar humor, tempo e gerar de novo
+      </button>
+      <div class="flex items-baseline justify-between mb-4">
+        <h2 class="text-xl font-headline font-semibold">Seu checklist</h2>
+        <span id="progress-label" class="text-xs font-semibold text-primary uppercase tracking-widest">0 de 0</span>
+      </div>
+      <p class="text-[11px] text-on-surface-variant mb-4 leading-relaxed">Cada tarefa concluída soma pontos no total de <a href="journey.html" class="text-primary font-semibold no-underline hover:underline">Crescimento</a> e ajuda a subir de nível.</p>
+      <p id="intention-display" class="text-sm text-on-surface-variant italic mb-4 hidden"></p>
+
+      <div id="task-list" class="flex flex-col gap-3 mb-6"></div>
+
+      <div class="flex gap-2 mb-4">
+        <input id="custom-task" type="text" maxlength="120" class="flex-1 rounded-xl border-0 bg-surface-container-low px-4 py-3 text-on-surface text-sm focus:ring-2 focus:ring-primary placeholder:text-on-surface-variant/50" placeholder="Adicionar tarefa sua…" />
+        <button type="button" id="btn-add-custom" class="shrink-0 px-4 rounded-xl bg-primary text-on-primary font-semibold text-sm border-0 cursor-pointer">Add</button>
+      </div>
+
+      <a href="add.html" class="flex w-full items-center justify-center gap-2 py-4 rounded-2xl bg-secondary-container/80 text-on-surface font-semibold text-sm no-underline hover:opacity-90 transition-opacity">
+        <span class="material-symbols-outlined text-primary">add_a_photo</span>
+        Registrar um momento na galeria
+      </a>
+    </section>
+  </main>
+
+  <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-end pb-6 pt-2 px-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl shadow-[0_-8px_32px_rgba(171,37,84,0.06)] rounded-t-[2rem] max-w-lg mx-auto left-1/2 -translate-x-1/2 w-full">
+    <a href="gallery.html" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 p-2 hover:text-rose-500 transition-colors no-underline">
+      <span class="material-symbols-outlined mb-1">photo_library</span>
+      <span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium uppercase tracking-widest">Galeria</span>
+    </a>
+    <a href="add.html" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 p-2 hover:text-rose-500 transition-colors no-underline">
+      <span class="material-symbols-outlined mb-1">add_circle</span>
+      <span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium uppercase tracking-widest">Adicionar</span>
+    </a>
+    <a href="journey.html" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 p-2 hover:text-rose-500 transition-colors no-underline">
+      <span class="material-symbols-outlined mb-1">auto_graph</span>
+      <span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium uppercase tracking-widest">Crescimento</span>
+    </a>
+    <a href="my-day.html" class="flex flex-col items-center justify-center bg-gradient-to-tr from-rose-600 to-rose-400 text-white rounded-full p-3 mb-2 scale-110 shadow-lg shadow-rose-500/20 active:scale-90 duration-200 no-underline">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">fact_check</span>
+      <span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-tighter mt-1">Checklist</span>
+    </a>
+  </nav>
+
+  <script src="js/mamy-progress.js"></script>
+  <script src="js/mamy-pools.js"></script>
+  <script>
+(function () {
+  var STORAGE = 'mamyMoments_myDay_v1';
+  var PROFILE_KEY = 'mamyMoments_profile';
+
+  var TASK_POOL = window.MM_MYDAY_POOL || [];
+
+  var state = {
+    date: '',
+    mood: 'calmo',
+    timeBudget: 15,
+    intention: '',
+    items: [],
+    usedPoolIdsToday: [],
+  };
+
+  var mountedDay = todayKey();
+
+  function pad2(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
+
+  function todayKey() {
+    var d = new Date();
+    return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+  }
+
+  function childMonthsOld() {
+    try {
+      var raw = localStorage.getItem(PROFILE_KEY);
+      if (!raw) return 6;
+      var p = JSON.parse(raw);
+      if (!p.childBirthDate) return 6;
+      var b = new Date(p.childBirthDate + 'T12:00:00');
+      var n = new Date();
+      var months = (n.getFullYear() - b.getFullYear()) * 12 + (n.getMonth() - b.getMonth());
+      if (n.getDate() < b.getDate()) months--;
+      return Math.max(0, Math.min(months, 60));
+    } catch (e) {
+      return 6;
+    }
+  }
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE);
+      if (!raw) return false;
+      var o = JSON.parse(raw);
+      if (o.date !== todayKey()) return false;
+      if (!o.usedPoolIdsToday || !Array.isArray(o.usedPoolIdsToday)) o.usedPoolIdsToday = [];
+      state = o;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function saveState() {
+    state.date = todayKey();
+    try {
+      localStorage.setItem(STORAGE, JSON.stringify(state));
+    } catch (e) {
+      /* storage indisponível: estado só em memória nesta aba */
+    }
+    syncProgressFromMyDay();
+  }
+
+  function syncProgressFromMyDay() {
+    if (!window.MamyProgress) return;
+    var o = MamyProgress.loadProgress();
+    MamyProgress.syncMyDayFromItems(o, MamyProgress.todayKey(), state.items || []);
+    MamyProgress.saveProgress(o);
+  }
+
+  function clearStaleMyDayStorage() {
+    try {
+      var raw = localStorage.getItem(STORAGE);
+      if (!raw) return false;
+      var o = JSON.parse(raw);
+      if (o.date && o.date !== todayKey()) {
+        localStorage.removeItem(STORAGE);
+        return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  function showNewDayBanner() {
+    var ban = document.getElementById('myday-newday-banner');
+    if (ban) ban.classList.remove('hidden');
+  }
+
+  function hideNewDayBanner() {
+    var ban = document.getElementById('myday-newday-banner');
+    if (ban) ban.classList.add('hidden');
+  }
+
+  function refreshHeaderDate() {
+    var el = document.getElementById('myday-date');
+    if (!el) return;
+    var d = new Date();
+    var opts = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+    el.textContent = d.toLocaleDateString('pt-BR', opts);
+  }
+
+  function onCalendarDayChanged() {
+    mountedDay = todayKey();
+    state.date = todayKey();
+    state.items = [];
+    state.intention = '';
+    state.usedPoolIdsToday = [];
+    try {
+      localStorage.removeItem(STORAGE);
+    } catch (e) {}
+    showPlannerMode();
+    document.getElementById('intention').value = '';
+    refreshHeaderDate();
+    showNewDayBanner();
+  }
+
+  function watchCalendarDay() {
+    setInterval(function () {
+      if (todayKey() !== mountedDay) {
+        onCalendarDayChanged();
+      }
+    }, 45000);
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'visible' && todayKey() !== mountedDay) {
+        onCalendarDayChanged();
+      }
+    });
+  }
+
+  function setChipGroup(containerSelector, attr, value) {
+    document.querySelectorAll(containerSelector + ' [data-' + attr + ']').forEach(function (btn) {
+      var on = btn.getAttribute('data-' + attr) === String(value);
+      btn.classList.toggle('chip-on', on);
+      btn.classList.toggle('bg-surface-container-low', !on);
+      btn.classList.toggle('text-on-surface-variant', !on);
+    });
+  }
+
+  function scoreTask(t, mood, months) {
+    var minA = t.minAge != null ? t.minAge : 0;
+    var maxA = t.maxAge != null ? t.maxAge : 120;
+    if (months < minA || months > maxA) return -1;
+    if (t.moods.indexOf(mood) === -1) return 0;
+    return 1 + Math.random() * 0.5;
+  }
+
+  function getCandidatesForPick(excludeIds) {
+    var mood = state.mood;
+    var months = childMonthsOld();
+    var ex = excludeIds || [];
+    var candidates = TASK_POOL.map(function (t) {
+      return { t: t, s: scoreTask(t, mood, months) };
+    }).filter(function (x) {
+      return x.s > 0 && ex.indexOf(x.t.id) === -1;
+    });
+
+    if (candidates.length === 0) {
+      candidates = TASK_POOL.map(function (t) {
+        var minA = t.minAge != null ? t.minAge : 0;
+        var maxA = t.maxAge != null ? t.maxAge : 120;
+        if (months < minA || months > maxA) return null;
+        if (ex.indexOf(t.id) !== -1) return null;
+        return { t: t, s: 0.5 + Math.random() * 0.2 };
+      }).filter(Boolean);
+    }
+
+    if (candidates.length === 0 && ex.length > 0) {
+      return getCandidatesForPick([]);
+    }
+    return candidates;
+  }
+
+  function buildSuggestions() {
+    if (!state.usedPoolIdsToday || !Array.isArray(state.usedPoolIdsToday)) {
+      state.usedPoolIdsToday = [];
+    }
+    var budget = Number(state.timeBudget) || 15;
+    var candidates = getCandidatesForPick(state.usedPoolIdsToday);
+
+    candidates.sort(function (a, b) {
+      return b.s - a.s;
+    });
+
+    var tight = candidates.filter(function (x) {
+      return x.t.minutes <= budget;
+    });
+    if (tight.length > 0) candidates = tight;
+
+    var picked = [];
+    var used = 0;
+    var maxTasks = budget <= 5 ? 3 : budget <= 15 ? 4 : 5;
+    var cap = budget;
+
+    for (var i = 0; i < candidates.length && picked.length < maxTasks; i++) {
+      var t = candidates[i].t;
+      if (used + t.minutes <= cap + 5) {
+        picked.push({
+          id: t.id,
+          title: t.title,
+          subtitle: t.subtitle,
+          points: t.points,
+          minutes: t.minutes,
+          done: false,
+          source: 'suggested',
+        });
+        used += t.minutes;
+      }
+    }
+
+    if (picked.length === 0) {
+      picked.push({
+        id: 'fallback-' + Date.now().toString(36),
+        title: 'Só um colinho sem pressa',
+        subtitle: 'Regulação e vínculo',
+        points: 15,
+        minutes: 10,
+        done: false,
+        source: 'suggested',
+      });
+    }
+
+    state.items = picked;
+    saveState();
+  }
+
+  function uid() {
+    return 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  }
+
+  function renderTasks() {
+    var list = document.getElementById('task-list');
+    list.innerHTML = '';
+    state.items.forEach(function (item) {
+      var row = document.createElement('div');
+      row.className =
+        'flex items-start gap-3 p-4 rounded-[1.25rem] border transition-colors ' +
+        (item.done
+          ? 'bg-surface-container-low/80 border-transparent opacity-75'
+          : 'bg-surface-container-lowest border-outline-variant/20 shadow-sm dark:bg-zinc-900/40');
+
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className =
+        'mt-0.5 w-7 h-7 shrink-0 rounded-full border-2 flex items-center justify-center border-0 cursor-pointer ' +
+        (item.done ? 'bg-primary text-white border-primary' : 'border-outline-variant bg-transparent ring-2 ring-inset ring-outline-variant/40');
+      btn.setAttribute('aria-label', item.done ? 'Desmarcar' : 'Concluir');
+      if (item.done) {
+        var ch = document.createElement('span');
+        ch.className = 'material-symbols-outlined text-[18px]';
+        ch.textContent = 'check';
+        btn.appendChild(ch);
+      }
+      btn.addEventListener('click', function () {
+        item.done = !item.done;
+        saveState();
+        var allDone = (state.items || []).length > 0 && (state.items || []).every(function (i) {
+          return i.done;
+        });
+        if (allDone) {
+          (state.items || []).forEach(function (it) {
+            if (it.source !== 'suggested') return;
+            if ((state.usedPoolIdsToday || []).indexOf(it.id) === -1) {
+              state.usedPoolIdsToday.push(it.id);
+            }
+          });
+          buildSuggestions();
+        }
+        renderTasks();
+        updateProgress();
+      });
+
+      var mid = document.createElement('div');
+      mid.className = 'flex-1 min-w-0 text-left';
+      var h = document.createElement('p');
+      h.className = 'font-medium text-on-surface leading-snug ' + (item.done ? 'line-through' : '');
+      h.textContent = item.title;
+      var sub = document.createElement('p');
+      sub.className = 'text-xs text-on-surface-variant mt-1 ' + (item.done ? 'line-through opacity-70' : '');
+      sub.textContent = item.subtitle || '';
+      mid.appendChild(h);
+      mid.appendChild(sub);
+
+      var pts = document.createElement('span');
+      pts.className = 'text-xs font-bold shrink-0 ' + (item.done ? 'text-tertiary' : 'text-primary');
+      pts.textContent = '+' + item.points + ' pts';
+
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'text-on-surface-variant hover:text-error p-1 border-0 bg-transparent cursor-pointer shrink-0';
+      del.innerHTML = '<span class="material-symbols-outlined text-[20px]">close</span>';
+      del.setAttribute('aria-label', 'Remover tarefa');
+      var itemId = item.id;
+      del.addEventListener('click', function () {
+        state.items = state.items.filter(function (x) {
+          return x.id !== itemId;
+        });
+        saveState();
+        renderTasks();
+        updateProgress();
+      });
+
+      row.appendChild(btn);
+      row.appendChild(mid);
+      row.appendChild(pts);
+      row.appendChild(del);
+      list.appendChild(row);
+    });
+    updateProgress();
+  }
+
+  function updateProgress() {
+    var total = state.items.length;
+    var done = state.items.filter(function (i) {
+      return i.done;
+    }).length;
+    document.getElementById('progress-label').textContent = done + ' de ' + total + ' concluídos';
+  }
+
+  function showChecklistMode() {
+    document.getElementById('planner').classList.add('hidden');
+    document.getElementById('checklist-block').classList.remove('hidden');
+    var id = document.getElementById('intention-display');
+    if (state.intention && state.intention.trim()) {
+      id.textContent = '“' + state.intention.trim() + '”';
+      id.classList.remove('hidden');
+    } else {
+      id.classList.add('hidden');
+    }
+    renderTasks();
+  }
+
+  function showPlannerMode() {
+    document.getElementById('planner').classList.remove('hidden');
+    document.getElementById('checklist-block').classList.add('hidden');
+    document.getElementById('intention').value = state.intention || '';
+    setChipGroup('#mood-chips', 'mood', state.mood);
+    setChipGroup('#time-chips', 'time', state.timeBudget);
+    window.scrollTo(0, 0);
+  }
+
+  function initUI() {
+    var staleWelcome = clearStaleMyDayStorage();
+    mountedDay = todayKey();
+
+    refreshHeaderDate();
+
+    document.getElementById('intention').value = state.intention || '';
+    setChipGroup('#mood-chips', 'mood', state.mood);
+    setChipGroup('#time-chips', 'time', state.timeBudget);
+
+    document.querySelectorAll('.mood-chip').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state.mood = b.getAttribute('data-mood');
+        setChipGroup('#mood-chips', 'mood', state.mood);
+      });
+    });
+    document.querySelectorAll('.time-chip').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state.timeBudget = Number(b.getAttribute('data-time'));
+        setChipGroup('#time-chips', 'time', state.timeBudget);
+      });
+    });
+
+    document.getElementById('btn-build').addEventListener('click', function () {
+      state.intention = document.getElementById('intention').value.trim();
+      buildSuggestions();
+      showChecklistMode();
+    });
+
+    document.getElementById('btn-replan').addEventListener('click', function () {
+      showPlannerMode();
+    });
+
+    var dismissNewDay = document.getElementById('myday-newday-dismiss');
+    if (dismissNewDay) {
+      dismissNewDay.addEventListener('click', function () {
+        hideNewDayBanner();
+      });
+    }
+
+    if (staleWelcome) {
+      showNewDayBanner();
+    }
+
+    watchCalendarDay();
+
+    document.getElementById('btn-add-custom').addEventListener('click', function () {
+      var inp = document.getElementById('custom-task');
+      var text = inp.value.trim();
+      if (!text) return;
+      state.items.push({
+        id: uid(),
+        title: text,
+        subtitle: 'Tarefa sua',
+        points: 10,
+        minutes: 5,
+        done: false,
+        source: 'custom',
+      });
+      inp.value = '';
+      saveState();
+      renderTasks();
+    });
+
+    if (loadState() && state.items && state.items.length > 0) {
+      document.getElementById('intention').value = state.intention || '';
+      setChipGroup('#mood-chips', 'mood', state.mood);
+      setChipGroup('#time-chips', 'time', state.timeBudget);
+      showChecklistMode();
+      document.getElementById('planner').classList.add('hidden');
+      syncProgressFromMyDay();
+    }
+  }
+
+  initUI();
+})();
+  </script>
+</body>
+</html>

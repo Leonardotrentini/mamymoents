@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#ab2554"/>
+<meta name="color-scheme" content="light"/>
+<link rel="stylesheet" href="css/mobile-app.css"/>
+<title>Mamy Moments - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#006b24",
+                        "on-secondary-fixed": "#23191e",
+                        "on-primary-container": "#fffbff",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "outline-variant": "#debfc4",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container": "#eeeeee",
+                        "primary": "#ab2554",
+                        "primary-fixed-dim": "#ffb1c2",
+                        "surface-container-high": "#e8e8e8",
+                        "on-tertiary-container": "#f7fff2",
+                        "on-secondary-container": "#6f6066",
+                        "primary-container": "#cc406c",
+                        "primary-fixed": "#ffd9df",
+                        "inverse-surface": "#2f3131",
+                        "tertiary-fixed-dim": "#60df71",
+                        "on-primary-fixed": "#3f0018",
+                        "background": "#f9f9f9",
+                        "inverse-primary": "#ffb1c2",
+                        "secondary-fixed-dim": "#d4c2c8",
+                        "surface-dim": "#dadada",
+                        "on-surface": "#1a1c1c",
+                        "surface-tint": "#af2856",
+                        "on-surface-variant": "#574145",
+                        "tertiary-container": "#008730",
+                        "outline": "#8b7075",
+                        "secondary-fixed": "#f1dde4",
+                        "on-tertiary-fixed": "#002106",
+                        "surface-bright": "#f9f9f9",
+                        "secondary": "#695b60",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "inverse-on-surface": "#f1f1f1",
+                        "on-primary-fixed-variant": "#8e063f",
+                        "secondary-container": "#f1dde4",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e2e2e2",
+                        "on-background": "#1a1c1c",
+                        "surface": "#f9f9f9",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#504349",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#7dfd8a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-primary-gradient {
+            background: linear-gradient(135deg, #ab2554 0%, #cc406c 100%);
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(249, 249, 249, 0.8);
+        }
+        .ob-scroll {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-x: contain;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .ob-scroll::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed antialiased overflow-hidden">
+<!-- Onboarding Container -->
+<main class="relative h-screen w-full max-w-md mx-auto flex flex-col items-center overflow-hidden">
+<!-- Header / Logo -->
+<header class="w-full flex justify-center items-center gap-3 pt-12 pb-6 shrink-0 px-4">
+<div class="mm-logo-heart w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0" aria-hidden="true">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;">favorite</span>
+</div>
+<h1 class="text-xl font-bold bg-gradient-to-br from-primary to-primary-container bg-clip-text text-transparent tracking-tight">
+                Mamy Moments
+            </h1>
+</header>
+
+<!-- Carrossel: deslize horizontalmente (toque ou arrastar a área) -->
+<div class="flex-1 min-h-0 w-full flex flex-col relative">
+<div id="onb-scroll" class="ob-scroll flex h-full w-full flex-row overflow-x-auto overflow-y-hidden snap-x snap-mandatory" tabindex="0" role="region" aria-label="Apresentação em slides. Deslize para o lado.">
+<!-- Slide 1 -->
+<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-center text-center space-y-12 py-8 px-8 box-border" aria-label="Slide 1 de 4">
+<div class="relative w-full max-w-[320px] aspect-square">
+<div class="absolute inset-0 bg-secondary-container/30 rounded-3xl -rotate-6 scale-95 origin-bottom-left"></div>
+<div class="absolute inset-0 bg-surface-container-lowest rounded-3xl shadow-[0_8px_32px_rgba(171,37,84,0.06)] overflow-hidden">
+<img alt="Mãe e bebê" class="w-full h-full object-cover grayscale-[0.2] contrast-[0.95]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqEnx6pqBohoRTKXrj476h56Wrrpr_ItHgwZ2iIa_RsYJz2axyMkUD9IFQs0eGQ6B4pzIqkyVNO8aP1NWeIKkDL5-f9sTkBNeys-n2KJ10jzPKZ6wh5Cij2xlWJaYiV1KeGLbII6dvSbGTbtkVOsn3aRDBDpkWCBmH6vhoG6k5Snj1CKdQMzY7OQgdXleLmO1Bk94mcGe7wNk-XXWWrg_UiPmiFW4_piHkkrqQ1jgglaeNeyR0_dMasj-ErFuK9ATNeSa54Joxs7V3"/>
+</div>
+<div class="absolute -bottom-4 -right-4 w-20 h-20 bg-primary-fixed/40 rounded-full blur-xl"></div>
+</div>
+<div class="space-y-4">
+<h2 class="text-[2.75rem] font-bold leading-[1.1] text-on-surface tracking-tighter">Guarde cada momento</h2>
+<p class="text-on-surface-variant text-base font-normal leading-relaxed px-4">Preserve cada memória preciosa com seu bebê de forma simples e elegante.</p>
+</div>
+</section>
+<!-- Slide 2 -->
+<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-center text-center space-y-12 py-8 px-8 box-border" aria-label="Slide 2 de 4">
+<div class="relative w-full max-w-[320px] aspect-square">
+<div class="absolute inset-0 bg-secondary-container/30 rounded-3xl -rotate-6 scale-95 origin-bottom-left"></div>
+<div class="absolute inset-0 bg-surface-container-lowest rounded-3xl shadow-[0_8px_32px_rgba(171,37,84,0.06)] overflow-hidden">
+<img alt="" class="w-full h-full object-cover grayscale-[0.2] contrast-[0.95]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6M8ktBCQaZuRbTws4lSTFZ8HpUSTe-9njswOFjqs9x5ThQlwqRtTpJHhrUXcWl1IGg2ge3v5dGd6DblboTl5sEjYwe63jNG3zxW8d2hrvZFIemywnaKBrzZv-WOJ6k5YI8H99rkaT5PJaGH8KiKcXUg39gPYLmWpU-FwGlvRq2yjCrxhpCtasg7qwA_2Z5LxMT-TqXAj9X3Fg1AuhNafMMOuJ_nhDAWnuBwteMv8Bw-pyezFIyxUWLk4XRKdyCHohWSlCZYklW6zA"/>
+</div>
+<div class="absolute -bottom-4 -right-4 w-20 h-20 bg-primary-fixed/40 rounded-full blur-xl"></div>
+</div>
+<div class="space-y-4">
+<h2 class="text-[2.75rem] font-bold leading-[1.1] text-on-surface tracking-tighter">Organize com carinho</h2>
+<p class="text-on-surface-variant text-base font-normal leading-relaxed px-4">Filtre por semana, mês ou favoritos e encontre em segundos o que mais aquece o coração.</p>
+</div>
+</section>
+<!-- Slide 3 -->
+<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-center text-center space-y-12 py-8 px-8 box-border" aria-label="Slide 3 de 4">
+<div class="relative w-full max-w-[320px] aspect-square">
+<div class="absolute inset-0 bg-secondary-container/30 rounded-3xl -rotate-6 scale-95 origin-bottom-left"></div>
+<div class="absolute inset-0 bg-surface-container-lowest rounded-3xl shadow-[0_8px_32px_rgba(171,37,84,0.06)] overflow-hidden">
+<img alt="" class="w-full h-full object-cover grayscale-[0.2] contrast-[0.95]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnQCQa364z3FvJji5I8h0VwGY_Je-20g35vT9bSKVa9tHSj0VYbHNgWD-OskjA10MEMAf700WCi6xKN5m0xW8ms1ucDaO1NIy-eshNbYtbyNA0zNWLswx5EIVfO84DWcPiL7tOiRWxQkXu-3kI6HnWpq8cNc5e96l4QtM39vQ6Apocv22tdFBxWaCuv8M7oflCH8wkXaDvyiuKbzSbqqPdDZwDBjQueOwNmhTnijqzRJAvXvAriZsg_9JaRuHKjnFz5xZF6gVCCurn"/>
+</div>
+<div class="absolute -bottom-4 -right-4 w-20 h-20 bg-primary-fixed/40 rounded-full blur-xl"></div>
+</div>
+<div class="space-y-4">
+<h2 class="text-[2.75rem] font-bold leading-[1.1] text-on-surface tracking-tighter">Celebre cada fase</h2>
+<p class="text-on-surface-variant text-base font-normal leading-relaxed px-4">Rituais, conquistas e medalhas para acompanhar o crescimento do seu pequeno explorador.</p>
+</div>
+</section>
+<!-- Slide 4: dados da mamãe e do bebê -->
+<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-stretch py-6 px-8 box-border overflow-y-auto overflow-x-hidden touch-pan-y max-h-full" aria-label="Slide 4 de 4">
+<div class="w-full max-w-[340px] mx-auto flex flex-col gap-6 text-left pb-4">
+<div>
+<h2 class="text-[2rem] font-bold leading-tight text-on-surface tracking-tighter">Quem está por aqui?</h2>
+<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">Conte um pouco sobre vocês para deixar o diário mais pessoal. Tudo fica só neste aparelho.</p>
+</div>
+<div class="bg-surface-container-low rounded-3xl p-6 shadow-[0_4px_24px_rgba(171,37,84,0.06)] space-y-5">
+<div>
+<label for="profile-mother" class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest">
+<span class="material-symbols-outlined text-base">face_3</span> Mamãe ou responsável
+</label>
+<input id="profile-mother" name="motherName" autocomplete="name" required class="mt-2 w-full bg-surface-container-lowest rounded-xl px-4 py-3 text-on-surface font-medium border-0 ring-1 ring-black/5 focus:ring-2 focus:ring-primary placeholder:text-on-surface-variant/50" placeholder="Seu nome completo" type="text"/>
+</div>
+<div>
+<label for="profile-mother-nick" class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Como podemos te chamar?</label>
+<input id="profile-mother-nick" name="motherNickname" autocomplete="nickname" class="mt-2 w-full bg-surface-container-lowest rounded-xl px-4 py-3 text-on-surface font-medium border-0 ring-1 ring-black/5 focus:ring-2 focus:ring-primary placeholder:text-on-surface-variant/50" placeholder="Ex.: Mari" type="text"/>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-3xl p-6 shadow-[0_4px_24px_rgba(171,37,84,0.06)] space-y-5">
+<div>
+<label for="profile-child" class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest">
+<span class="material-symbols-outlined text-base">child_care</span> Nome do bebê
+</label>
+<input id="profile-child" name="childName" required class="mt-2 w-full bg-surface-container-lowest rounded-xl px-4 py-3 text-on-surface font-medium border-0 ring-1 ring-black/5 focus:ring-2 focus:ring-primary placeholder:text-on-surface-variant/50" placeholder="Como você chama o neném" type="text"/>
+</div>
+<div>
+<label for="profile-birth" class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Data de nascimento</label>
+<input id="profile-birth" name="childBirthDate" required class="mt-2 w-full bg-surface-container-lowest rounded-xl px-4 py-3 text-on-surface font-medium border-0 ring-1 ring-black/5 focus:ring-2 focus:ring-primary" type="date"/>
+</div>
+<div>
+<label for="profile-gender" class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Sexo do bebê <span class="font-normal normal-case text-on-surface-variant/70">(opcional)</span></label>
+<select id="profile-gender" name="childGender" class="mt-2 w-full bg-surface-container-lowest rounded-xl px-4 py-3 text-on-surface font-medium border-0 ring-1 ring-black/5 focus:ring-2 focus:ring-primary">
+<option value="">Prefiro não informar</option>
+<option value="girl">Menina</option>
+<option value="boy">Menino</option>
+</select>
+</div>
+</div>
+<p id="profile-error" class="hidden text-error text-sm font-medium text-center" role="alert"></p>
+</div>
+</section>
+</div>
+</div>
+
+<!-- Sticky Footer Navigation -->
+<footer class="w-full px-8 pb-16 pt-8 space-y-10 flex flex-col items-center shrink-0">
+<div id="onb-dots" class="flex items-center gap-2 flex-wrap justify-center" role="tablist" aria-label="Indicadores do carrossel">
+<button type="button" class="ob-dot h-2 rounded-full bg-primary-gradient w-8 transition-all duration-300 border-0 p-0 cursor-pointer" data-i="0" aria-label="Ir para slide 1" aria-current="true"></button>
+<button type="button" class="ob-dot h-2 w-2 rounded-full bg-surface-container-highest transition-all duration-300 border-0 p-0 cursor-pointer hover:opacity-80" data-i="1" aria-label="Ir para slide 2"></button>
+<button type="button" class="ob-dot h-2 w-2 rounded-full bg-surface-container-highest transition-all duration-300 border-0 p-0 cursor-pointer hover:opacity-80" data-i="2" aria-label="Ir para slide 3"></button>
+<button type="button" class="ob-dot h-2 w-2 rounded-full bg-surface-container-highest transition-all duration-300 border-0 p-0 cursor-pointer hover:opacity-80" data-i="3" aria-label="Ir para cadastro"></button>
+</div>
+<div class="w-full flex items-center justify-between">
+<a href="gallery.html" class="text-on-surface-variant font-semibold px-4 py-2 hover:opacity-70 transition-opacity no-underline">Pular</a>
+<button type="button" id="onb-next" class="bg-primary-gradient text-on-primary font-bold py-4 px-10 rounded-full shadow-[0_8px_32px_rgba(171,37,84,0.12)] flex items-center space-x-2 active:scale-95 transition-transform border-0 cursor-pointer">
+<span id="onb-next-label">Próximo</span>
+<span class="material-symbols-outlined text-sm" id="onb-next-icon">arrow_forward</span>
+</button>
+</div>
+</footer>
+<div class="absolute -top-24 -left-24 w-64 h-64 bg-primary-fixed/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute -bottom-12 -right-12 w-80 h-80 bg-secondary-fixed/20 rounded-full blur-[120px] pointer-events-none"></div>
+</main>
+<script>
+(function () {
+  var sc = document.getElementById('onb-scroll');
+  var dots = document.querySelectorAll('.ob-dot');
+  var btn = document.getElementById('onb-next');
+  var lbl = document.getElementById('onb-next-label');
+  var icon = document.getElementById('onb-next-icon');
+  var total = 4;
+  var PROFILE_KEY = 'mamyMoments_profile';
+
+  function slideWidth() {
+    return sc.clientWidth;
+  }
+
+  function currentIndex() {
+    var w = slideWidth();
+    if (!w) return 0;
+    return Math.round(sc.scrollLeft / w);
+  }
+
+  function goTo(i) {
+    var w = slideWidth();
+    sc.scrollTo({ left: i * w, behavior: 'smooth' });
+  }
+
+  function paintDots() {
+    var idx = currentIndex();
+    if (idx < 0) idx = 0;
+    if (idx > total - 1) idx = total - 1;
+    dots.forEach(function (d, j) {
+      var on = j === idx;
+      d.setAttribute('aria-current', on ? 'true' : 'false');
+      d.classList.toggle('bg-primary-gradient', on);
+      d.classList.toggle('w-8', on);
+      d.classList.toggle('w-2', !on);
+      d.classList.toggle('bg-surface-container-highest', !on);
+    });
+    var last = idx >= total - 1;
+    lbl.textContent = last ? 'Começar' : 'Próximo';
+    icon.textContent = last ? 'celebration' : 'arrow_forward';
+    if (last) {
+      icon.style.fontVariationSettings = "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24";
+    } else {
+      icon.style.fontVariationSettings = "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24";
+    }
+  }
+
+  function setBirthInputBounds() {
+    var birth = document.getElementById('profile-birth');
+    if (!birth) return;
+    var t = new Date();
+    var max = t.toISOString().slice(0, 10);
+    birth.setAttribute('max', max);
+    t.setFullYear(t.getFullYear() - 6);
+    birth.setAttribute('min', t.toISOString().slice(0, 10));
+  }
+
+  function loadProfileDraft() {
+    try {
+      var raw = localStorage.getItem(PROFILE_KEY);
+      if (!raw) return;
+      var p = JSON.parse(raw);
+      if (p.motherName) document.getElementById('profile-mother').value = p.motherName;
+      if (p.motherNickname) document.getElementById('profile-mother-nick').value = p.motherNickname;
+      if (p.childName) document.getElementById('profile-child').value = p.childName;
+      if (p.childBirthDate) document.getElementById('profile-birth').value = p.childBirthDate;
+      if (p.childGender) document.getElementById('profile-gender').value = p.childGender;
+    } catch (e) {}
+  }
+
+  function validateAndSaveProfile() {
+    var mother = document.getElementById('profile-mother').value.trim();
+    var nick = document.getElementById('profile-mother-nick').value.trim();
+    var child = document.getElementById('profile-child').value.trim();
+    var birth = document.getElementById('profile-birth').value;
+    var gender = document.getElementById('profile-gender').value;
+    var err = document.getElementById('profile-error');
+    err.classList.add('hidden');
+    err.textContent = '';
+
+    if (!mother || !child || !birth) {
+      err.textContent = 'Preencha o nome da mamãe (ou responsável), o nome do bebê e a data de nascimento.';
+      err.classList.remove('hidden');
+      return false;
+    }
+
+    var payload = {
+      motherName: mother,
+      motherNickname: nick || mother.split(' ')[0] || mother,
+      childName: child,
+      childBirthDate: birth,
+      childGender: gender || null,
+      onboardingCompletedAt: new Date().toISOString(),
+    };
+    localStorage.setItem(PROFILE_KEY, JSON.stringify(payload));
+    return true;
+  }
+
+  var scrollEndTimer;
+  sc.addEventListener('scroll', function () {
+    paintDots();
+    clearTimeout(scrollEndTimer);
+    scrollEndTimer = setTimeout(paintDots, 80);
+  });
+
+  window.addEventListener('resize', function () {
+    var idx = currentIndex();
+    sc.scrollLeft = idx * slideWidth();
+    paintDots();
+  });
+
+  dots.forEach(function (d) {
+    d.addEventListener('click', function () {
+      goTo(parseInt(d.getAttribute('data-i'), 10));
+    });
+  });
+
+  btn.addEventListener('click', function () {
+    var idx = currentIndex();
+    if (idx < total - 1) {
+      goTo(idx + 1);
+    } else {
+      if (validateAndSaveProfile()) {
+        window.location.href = 'gallery.html';
+      }
+    }
+  });
+
+  setBirthInputBounds();
+  loadProfileDraft();
+  paintDots();
+})();
+</script>
+</body></html>
