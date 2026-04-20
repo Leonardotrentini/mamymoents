@@ -20,18 +20,25 @@ body {
   touch-action: manipulation;
 }
 
-/* Onboarding: altura estável no iOS (barra de URL / gestos) */
+/* Onboarding: altura = viewport visível (não usar 100svh no main — no Safari fica mais baixo que o ecrã e aparece faixa branca) */
+html.mm-onboarding-html {
+  height: 100%;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
 body.mm-onboarding {
   min-height: 100vh;
   min-height: 100dvh;
+  min-height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-@supports (height: 100svh) {
-  body.mm-onboarding > main.mm-onboarding-main {
-    height: 100svh !important;
-    max-height: 100svh !important;
-    min-height: 100svh !important;
-  }
+body.mm-onboarding > main.mm-onboarding-main {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 /* Onboarding: safe-area (Tailwind CDN pode sobrescrever — !important onde preciso) */
@@ -44,8 +51,7 @@ body.mm-onboarding > main > header {
 body.mm-onboarding > main > footer.onb-footer {
   padding-left: max(1.25rem, var(--mm-safe-left)) !important;
   padding-right: max(1.25rem, var(--mm-safe-right)) !important;
-  /* Cola na base do ecrã sem ficar por baixo do home indicator */
-  padding-bottom: max(1rem, calc(var(--mm-safe-bottom) + 0.75rem)) !important;
+  padding-bottom: max(1.25rem, calc(var(--mm-safe-bottom) + 0.875rem)) !important;
 }
 
 @media (min-width: 640px) {
