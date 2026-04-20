@@ -20,37 +20,49 @@ body {
   touch-action: manipulation;
 }
 
-/* Onboarding: safe-area acima do logo e acima do home indicator (Tailwind CDN carrega depois — usar !important) */
+/* Onboarding: altura estável no iOS (barra de URL / gestos) */
+body.mm-onboarding {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+@supports (height: 100svh) {
+  body.mm-onboarding > main.mm-onboarding-main {
+    height: 100svh !important;
+    max-height: 100svh !important;
+    min-height: 100svh !important;
+  }
+}
+
+/* Onboarding: safe-area (Tailwind CDN pode sobrescrever — !important onde preciso) */
 body.mm-onboarding > main > header {
   padding-left: max(1rem, var(--mm-safe-left)) !important;
   padding-right: max(1rem, var(--mm-safe-right)) !important;
-  padding-top: calc(3rem + var(--mm-safe-top)) !important;
+  padding-top: calc(2rem + var(--mm-safe-top)) !important;
 }
 
-body.mm-onboarding > main > footer {
-  padding-left: max(2rem, var(--mm-safe-left)) !important;
-  padding-right: max(2rem, var(--mm-safe-right)) !important;
-  padding-bottom: calc(4rem + var(--mm-safe-bottom)) !important;
+body.mm-onboarding > main > footer.onb-footer {
+  padding-left: max(1.25rem, var(--mm-safe-left)) !important;
+  padding-right: max(1.25rem, var(--mm-safe-right)) !important;
+  /* Cola na base do ecrã sem ficar por baixo do home indicator */
+  padding-bottom: max(1rem, calc(var(--mm-safe-bottom) + 0.75rem)) !important;
 }
 
-@media (max-width: 640px) {
-  body.mm-onboarding > main.relative.max-w-md {
-    height: 100vh !important;
-    height: 100dvh !important;
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
+@media (min-width: 640px) {
+  body.mm-onboarding > main > header {
+    padding-top: calc(3rem + var(--mm-safe-top)) !important;
   }
 }
 
 @media (max-width: 640px) and (orientation: landscape) {
   body.mm-onboarding > main > header {
-    padding-top: calc(1.5rem + var(--mm-safe-top)) !important;
-    padding-bottom: 0.75rem !important;
+    padding-top: calc(1.25rem + var(--mm-safe-top)) !important;
+    padding-bottom: 0.5rem !important;
   }
 
-  body.mm-onboarding > main > footer {
-    padding-top: 1rem !important;
-    padding-bottom: calc(2rem + var(--mm-safe-bottom)) !important;
+  body.mm-onboarding > main > footer.onb-footer {
+    padding-top: 0.75rem !important;
+    padding-bottom: max(0.75rem, calc(var(--mm-safe-bottom) + 0.5rem)) !important;
   }
 }
 

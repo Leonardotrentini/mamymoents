@@ -103,17 +103,12 @@
             display: none;
         }
     </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
   </head>
-<body class="mm-onboarding bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed antialiased overflow-hidden">
+<body class="mm-onboarding bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed antialiased overflow-x-hidden overflow-y-auto min-h-0">
 <!-- Onboarding Container -->
-<main class="relative h-screen w-full max-w-md mx-auto flex flex-col items-center overflow-hidden">
+<main class="mm-onboarding-main relative box-border mx-auto flex h-[100dvh] max-h-[100dvh] min-h-[100dvh] w-full max-w-md flex-col items-stretch overflow-hidden">
 <!-- Header / Logo -->
-<header class="w-full flex justify-center items-center gap-3 pt-12 pb-6 shrink-0 px-4">
+<header class="relative z-10 w-full flex justify-center items-center gap-3 pt-8 pb-3 sm:pt-12 sm:pb-6 shrink-0 px-4">
 <div class="mm-logo-heart w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0" aria-hidden="true">
 <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;">favorite</span>
 </div>
@@ -123,52 +118,52 @@
 </header>
 
 <!-- Carrossel: deslize horizontalmente (toque ou arrastar a área) -->
-<div class="flex-1 min-h-0 w-full flex flex-col relative">
-<div id="onb-scroll" class="ob-scroll flex h-full w-full flex-row overflow-x-auto overflow-y-hidden snap-x snap-mandatory" tabindex="0" role="region" aria-label="Apresentação em slides. Deslize para o lado.">
+<div class="relative z-10 flex min-h-0 w-full flex-1 flex-col">
+<div id="onb-scroll" class="ob-scroll flex min-h-0 h-full w-full flex-row overflow-x-auto overflow-y-hidden snap-x snap-mandatory" tabindex="0" role="region" aria-label="Apresentação em slides. Deslize para o lado.">
 <!-- Slide 1 -->
-<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-center text-center space-y-12 py-8 px-8 box-border" aria-label="Slide 1 de 4">
-<div class="relative w-full max-w-[320px] aspect-square">
+<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-center text-center justify-start space-y-5 sm:space-y-8 md:space-y-12 py-4 sm:py-8 px-5 sm:px-8 box-border h-full min-h-0 overflow-y-auto overscroll-y-contain" aria-label="Slide 1 de 4">
+<div class="relative w-full max-w-[min(280px,72vw)] sm:max-w-[320px] aspect-square shrink-0 mx-auto">
 <div class="absolute inset-0 bg-secondary-container/30 rounded-3xl -rotate-6 scale-95 origin-bottom-left"></div>
 <div class="absolute inset-0 bg-surface-container-lowest rounded-3xl shadow-[0_8px_32px_rgba(171,37,84,0.06)] overflow-hidden">
 <img alt="Mãe e bebê" class="w-full h-full object-cover grayscale-[0.2] contrast-[0.95]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqEnx6pqBohoRTKXrj476h56Wrrpr_ItHgwZ2iIa_RsYJz2axyMkUD9IFQs0eGQ6B4pzIqkyVNO8aP1NWeIKkDL5-f9sTkBNeys-n2KJ10jzPKZ6wh5Cij2xlWJaYiV1KeGLbII6dvSbGTbtkVOsn3aRDBDpkWCBmH6vhoG6k5Snj1CKdQMzY7OQgdXleLmO1Bk94mcGe7wNk-XXWWrg_UiPmiFW4_piHkkrqQ1jgglaeNeyR0_dMasj-ErFuK9ATNeSa54Joxs7V3"/>
 </div>
 <div class="absolute -bottom-4 -right-4 w-20 h-20 bg-primary-fixed/40 rounded-full blur-xl"></div>
 </div>
-<div class="space-y-4">
-<h2 class="text-[2.75rem] font-bold leading-[1.1] text-on-surface tracking-tighter">Guarde cada momento</h2>
-<p class="text-on-surface-variant text-base font-normal leading-relaxed px-4">Preserve cada memória preciosa com seu bebê de forma simples e elegante.</p>
+<div class="space-y-3 sm:space-y-4 w-full min-w-0 shrink-0">
+<h2 class="text-[clamp(1.5rem,6.2vw,2.75rem)] font-bold leading-snug text-on-surface tracking-tighter px-1 [overflow-wrap:anywhere]">Guarde cada momento</h2>
+<p class="text-on-surface-variant text-sm sm:text-base font-normal leading-relaxed px-2 sm:px-4">Preserve cada memória preciosa com seu bebê de forma simples e elegante.</p>
 </div>
 </section>
 <!-- Slide 2 -->
-<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-center text-center space-y-12 py-8 px-8 box-border" aria-label="Slide 2 de 4">
-<div class="relative w-full max-w-[320px] aspect-square">
+<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-center text-center justify-start space-y-5 sm:space-y-8 md:space-y-12 py-4 sm:py-8 px-5 sm:px-8 box-border h-full min-h-0 overflow-y-auto overscroll-y-contain" aria-label="Slide 2 de 4">
+<div class="relative w-full max-w-[min(280px,72vw)] sm:max-w-[320px] aspect-square shrink-0 mx-auto">
 <div class="absolute inset-0 bg-secondary-container/30 rounded-3xl -rotate-6 scale-95 origin-bottom-left"></div>
 <div class="absolute inset-0 bg-surface-container-lowest rounded-3xl shadow-[0_8px_32px_rgba(171,37,84,0.06)] overflow-hidden">
 <img alt="" class="w-full h-full object-cover grayscale-[0.2] contrast-[0.95]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6M8ktBCQaZuRbTws4lSTFZ8HpUSTe-9njswOFjqs9x5ThQlwqRtTpJHhrUXcWl1IGg2ge3v5dGd6DblboTl5sEjYwe63jNG3zxW8d2hrvZFIemywnaKBrzZv-WOJ6k5YI8H99rkaT5PJaGH8KiKcXUg39gPYLmWpU-FwGlvRq2yjCrxhpCtasg7qwA_2Z5LxMT-TqXAj9X3Fg1AuhNafMMOuJ_nhDAWnuBwteMv8Bw-pyezFIyxUWLk4XRKdyCHohWSlCZYklW6zA"/>
 </div>
 <div class="absolute -bottom-4 -right-4 w-20 h-20 bg-primary-fixed/40 rounded-full blur-xl"></div>
 </div>
-<div class="space-y-4">
-<h2 class="text-[2.75rem] font-bold leading-[1.1] text-on-surface tracking-tighter">Organize com carinho</h2>
-<p class="text-on-surface-variant text-base font-normal leading-relaxed px-4">Filtre por semana, mês ou favoritos e encontre em segundos o que mais aquece o coração.</p>
+<div class="space-y-3 sm:space-y-4 w-full min-w-0 shrink-0">
+<h2 class="text-[clamp(1.5rem,6.2vw,2.75rem)] font-bold leading-snug text-on-surface tracking-tighter px-1 [overflow-wrap:anywhere]">Organize com carinho</h2>
+<p class="text-on-surface-variant text-sm sm:text-base font-normal leading-relaxed px-2 sm:px-4">Filtre por semana, mês ou favoritos e encontre em segundos o que mais aquece o coração.</p>
 </div>
 </section>
 <!-- Slide 3 -->
-<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-center text-center space-y-12 py-8 px-8 box-border" aria-label="Slide 3 de 4">
-<div class="relative w-full max-w-[320px] aspect-square">
+<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-center text-center justify-start space-y-5 sm:space-y-8 md:space-y-12 py-4 sm:py-8 px-5 sm:px-8 box-border h-full min-h-0 overflow-y-auto overscroll-y-contain" aria-label="Slide 3 de 4">
+<div class="relative w-full max-w-[min(280px,72vw)] sm:max-w-[320px] aspect-square shrink-0 mx-auto">
 <div class="absolute inset-0 bg-secondary-container/30 rounded-3xl -rotate-6 scale-95 origin-bottom-left"></div>
 <div class="absolute inset-0 bg-surface-container-lowest rounded-3xl shadow-[0_8px_32px_rgba(171,37,84,0.06)] overflow-hidden">
 <img alt="" class="w-full h-full object-cover grayscale-[0.2] contrast-[0.95]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnQCQa364z3FvJji5I8h0VwGY_Je-20g35vT9bSKVa9tHSj0VYbHNgWD-OskjA10MEMAf700WCi6xKN5m0xW8ms1ucDaO1NIy-eshNbYtbyNA0zNWLswx5EIVfO84DWcPiL7tOiRWxQkXu-3kI6HnWpq8cNc5e96l4QtM39vQ6Apocv22tdFBxWaCuv8M7oflCH8wkXaDvyiuKbzSbqqPdDZwDBjQueOwNmhTnijqzRJAvXvAriZsg_9JaRuHKjnFz5xZF6gVCCurn"/>
 </div>
 <div class="absolute -bottom-4 -right-4 w-20 h-20 bg-primary-fixed/40 rounded-full blur-xl"></div>
 </div>
-<div class="space-y-4">
-<h2 class="text-[2.75rem] font-bold leading-[1.1] text-on-surface tracking-tighter">Celebre cada fase</h2>
-<p class="text-on-surface-variant text-base font-normal leading-relaxed px-4">Rituais, conquistas e medalhas para acompanhar o crescimento do seu pequeno explorador.</p>
+<div class="space-y-3 sm:space-y-4 w-full min-w-0 shrink-0">
+<h2 class="text-[clamp(1.5rem,6.2vw,2.75rem)] font-bold leading-snug text-on-surface tracking-tighter px-1 [overflow-wrap:anywhere]">Celebre cada fase</h2>
+<p class="text-on-surface-variant text-sm sm:text-base font-normal leading-relaxed px-2 sm:px-4">Rituais, conquistas e medalhas para acompanhar o crescimento do seu pequeno explorador.</p>
 </div>
 </section>
 <!-- Slide 4: dados da mamãe e do bebê -->
-<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-stretch py-6 px-8 box-border overflow-y-auto overflow-x-hidden touch-pan-y max-h-full" aria-label="Slide 4 de 4">
+<section class="min-w-full w-full shrink-0 snap-center snap-always flex flex-col items-stretch py-4 sm:py-6 px-5 sm:px-8 box-border overflow-y-auto overflow-x-hidden touch-pan-y h-full min-h-0 overscroll-y-contain" aria-label="Slide 4 de 4">
 <div class="w-full max-w-[340px] mx-auto flex flex-col gap-6 text-left pb-4">
 <div>
 <h2 class="text-[2rem] font-bold leading-tight text-on-surface tracking-tighter">Quem está por aqui?</h2>
@@ -213,7 +208,7 @@
 </div>
 
 <!-- Sticky Footer Navigation -->
-<footer class="w-full px-8 pb-16 pt-8 space-y-10 flex flex-col items-center shrink-0">
+<footer class="onb-footer relative z-10 w-full px-5 sm:px-8 pt-4 pb-4 sm:pt-8 sm:pb-8 space-y-4 sm:space-y-8 flex flex-col items-center shrink-0 mt-auto border-t border-outline-variant/10 sm:border-0 bg-surface/95 sm:bg-transparent">
 <div id="onb-dots" class="flex items-center gap-2 flex-wrap justify-center" role="tablist" aria-label="Indicadores do carrossel">
 <button type="button" class="ob-dot h-2 rounded-full bg-primary-gradient w-8 transition-all duration-300 border-0 p-0 cursor-pointer" data-i="0" aria-label="Ir para slide 1" aria-current="true"></button>
 <button type="button" class="ob-dot h-2 w-2 rounded-full bg-surface-container-highest transition-all duration-300 border-0 p-0 cursor-pointer hover:opacity-80" data-i="1" aria-label="Ir para slide 2"></button>
@@ -228,8 +223,8 @@
 </button>
 </div>
 </footer>
-<div class="absolute -top-24 -left-24 w-64 h-64 bg-primary-fixed/10 rounded-full blur-[100px] pointer-events-none"></div>
-<div class="absolute -bottom-12 -right-12 w-80 h-80 bg-secondary-fixed/20 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="pointer-events-none absolute -top-24 -left-24 z-0 h-64 w-64 rounded-full bg-primary-fixed/10 blur-[100px]" aria-hidden="true"></div>
+<div class="pointer-events-none absolute -bottom-12 -right-12 z-0 h-80 w-80 rounded-full bg-secondary-fixed/20 blur-[120px]" aria-hidden="true"></div>
 </main>
 <script>
 (function () {
