@@ -214,13 +214,7 @@
 </div>
 
 <!-- Sticky Footer Navigation -->
-<footer class="onb-footer relative z-10 mt-auto flex w-full shrink-0 flex-col items-center space-y-4 px-5 pt-3 pb-3 sm:space-y-8 sm:px-8 sm:pt-6 sm:pb-6">
-<div id="onb-dots" class="flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Indicadores do carrossel">
-<button type="button" class="ob-dot h-2 rounded-full bg-primary-gradient w-8 transition-all duration-300 border-0 p-0 cursor-pointer" data-i="0" aria-label="Ir para slide 1" aria-current="true"></button>
-<button type="button" class="ob-dot h-2 w-2 rounded-full bg-surface-container-highest transition-all duration-300 border-0 p-0 cursor-pointer hover:opacity-80" data-i="1" aria-label="Ir para slide 2"></button>
-<button type="button" class="ob-dot h-2 w-2 rounded-full bg-surface-container-highest transition-all duration-300 border-0 p-0 cursor-pointer hover:opacity-80" data-i="2" aria-label="Ir para slide 3"></button>
-<button type="button" class="ob-dot h-2 w-2 rounded-full bg-surface-container-highest transition-all duration-300 border-0 p-0 cursor-pointer hover:opacity-80" data-i="3" aria-label="Ir para cadastro"></button>
-</div>
+<footer class="onb-footer relative z-10 mt-auto flex w-full shrink-0 flex-col items-stretch px-5 pt-4 pb-3 sm:px-8 sm:pt-6 sm:pb-6">
 <div class="flex w-full max-w-md items-center justify-between gap-3">
 <a href="gallery.html" class="inline-flex min-h-[3rem] items-center px-4 py-2 text-base font-semibold text-on-surface-variant no-underline transition-opacity hover:opacity-70">Pular</a>
 <button type="button" id="onb-next" class="inline-flex cursor-pointer items-center space-x-2 rounded-full border-0 bg-primary-gradient px-8 py-3.5 text-base font-bold text-on-primary shadow-[0_8px_32px_rgba(171,37,84,0.12)] transition-transform active:scale-95 sm:px-10 sm:py-4">
@@ -235,7 +229,6 @@
 <script>
 (function () {
   var sc = document.getElementById('onb-scroll');
-  var dots = document.querySelectorAll('.ob-dot');
   var btn = document.getElementById('onb-next');
   var lbl = document.getElementById('onb-next-label');
   var icon = document.getElementById('onb-next-icon');
@@ -257,18 +250,10 @@
     sc.scrollTo({ left: i * w, behavior: 'smooth' });
   }
 
-  function paintDots() {
+  function syncFooterToSlide() {
     var idx = currentIndex();
     if (idx < 0) idx = 0;
     if (idx > total - 1) idx = total - 1;
-    dots.forEach(function (d, j) {
-      var on = j === idx;
-      d.setAttribute('aria-current', on ? 'true' : 'false');
-      d.classList.toggle('bg-primary-gradient', on);
-      d.classList.toggle('w-8', on);
-      d.classList.toggle('w-2', !on);
-      d.classList.toggle('bg-surface-container-highest', !on);
-    });
     var last = idx >= total - 1;
     lbl.textContent = last ? 'Começar' : 'Próximo';
     icon.textContent = last ? 'celebration' : 'arrow_forward';
@@ -332,21 +317,15 @@
 
   var scrollEndTimer;
   sc.addEventListener('scroll', function () {
-    paintDots();
+    syncFooterToSlide();
     clearTimeout(scrollEndTimer);
-    scrollEndTimer = setTimeout(paintDots, 80);
+    scrollEndTimer = setTimeout(syncFooterToSlide, 80);
   });
 
   window.addEventListener('resize', function () {
     var idx = currentIndex();
     sc.scrollLeft = idx * slideWidth();
-    paintDots();
-  });
-
-  dots.forEach(function (d) {
-    d.addEventListener('click', function () {
-      goTo(parseInt(d.getAttribute('data-i'), 10));
-    });
+    syncFooterToSlide();
   });
 
   btn.addEventListener('click', function () {
@@ -362,7 +341,7 @@
 
   setBirthInputBounds();
   loadProfileDraft();
-  paintDots();
+  syncFooterToSlide();
 })();
 </script>
 </body></html>
