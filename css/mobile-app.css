@@ -17,6 +17,41 @@ body {
   overflow-x: clip;
   -webkit-tap-highlight-color: rgba(171, 37, 84, 0.15);
   -webkit-font-smoothing: antialiased;
+  touch-action: manipulation;
+}
+
+/* Onboarding: safe-area acima do logo e acima do home indicator (Tailwind CDN carrega depois — usar !important) */
+body.mm-onboarding > main > header {
+  padding-left: max(1rem, var(--mm-safe-left)) !important;
+  padding-right: max(1rem, var(--mm-safe-right)) !important;
+  padding-top: calc(3rem + var(--mm-safe-top)) !important;
+}
+
+body.mm-onboarding > main > footer {
+  padding-left: max(2rem, var(--mm-safe-left)) !important;
+  padding-right: max(2rem, var(--mm-safe-right)) !important;
+  padding-bottom: calc(4rem + var(--mm-safe-bottom)) !important;
+}
+
+@media (max-width: 640px) {
+  body.mm-onboarding > main.relative.max-w-md {
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+  }
+}
+
+@media (max-width: 640px) and (orientation: landscape) {
+  body.mm-onboarding > main > header {
+    padding-top: calc(1.5rem + var(--mm-safe-top)) !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  body.mm-onboarding > main > footer {
+    padding-top: 1rem !important;
+    padding-bottom: calc(2rem + var(--mm-safe-bottom)) !important;
+  }
 }
 
 img,
@@ -62,9 +97,17 @@ button[aria-label='Remover tarefa'] {
   min-height: 2.75rem;
 }
 
-/* Inputs: evitar zoom iOS com fonte muito pequena */
+/* Inputs e selects: evitar zoom iOS com fonte muito pequena */
 input[type='text'],
 input:not([type]),
+input[type='date'],
+input[type='datetime-local'],
+input[type='email'],
+input[type='tel'],
+input[type='search'],
+input[type='url'],
+input[type='number'],
+select,
 textarea {
   font-size: 1rem;
 }
@@ -72,6 +115,14 @@ textarea {
 @media (min-width: 640px) {
   input[type='text'],
   input:not([type]),
+  input[type='date'],
+  input[type='datetime-local'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='search'],
+  input[type='url'],
+  input[type='number'],
+  select,
   textarea {
     font-size: inherit;
   }
@@ -86,4 +137,34 @@ textarea {
 /* Evitar quebra de layout em grids muito estreitos */
 main {
   min-width: 0;
+}
+
+/* Jornada: linhas de ritual — altura mínima confortável para toque */
+@media (max-width: 640px) {
+  button.journey-ritual-row {
+    min-height: 3.75rem;
+  }
+}
+
+/* Barra inferior: área de toque mínima nos ícones */
+@media (max-width: 640px) {
+  body > nav.fixed.bottom-0 a[href] {
+    min-width: 3.5rem;
+    min-height: 3.25rem;
+    box-sizing: border-box;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }
